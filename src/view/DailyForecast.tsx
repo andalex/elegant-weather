@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text } from "ink";
+import { Box, Text, Spacer } from "ink";
 import { MoonPhaseIcon } from "./MoonPhaseIcon.js";
 import { useForecast } from "../api/DataProviders/ForecastProvider.js";
 import { useWeatherOptions } from "../providers/WeatherOptionsProvider.js";
@@ -9,10 +9,10 @@ type Props = {};
 
 export const DailyForecast = () => {
 	const {
-		apiData: { data, status },
+		apiData: { data },
 	} = useForecast();
 	const { forecastDays, tempScale } = useWeatherOptions();
-	
+
 	return (
 		<Box flexDirection="column" width="100%" borderStyle="classic">
 			<Box justifyContent="center" padding={1}>
@@ -38,7 +38,7 @@ export const DailyForecast = () => {
 								paddingLeft={1}
 								paddingRight={1}
 							>
-								<Text color="blue">{day.dayReadable}</Text>
+								<Text color="magentaBright">{day.dayReadable}</Text>
 							</Box>
 							<Box
 								borderStyle="round"
@@ -47,28 +47,66 @@ export const DailyForecast = () => {
 								paddingLeft={1}
 								paddingRight={1}
 							>
-								<Text>Condition: <Text color="green">{day.condition}</Text></Text>
-								<Text>High: <Text color="green">{tempScale === TempScale.Fahrenheit ? day.maxTempF + "°F" : day.maxTempC + "°C"}</Text></Text>
-								<Text>Avg: <Text color="green">{tempScale === TempScale.Fahrenheit ? day.avgTempF + "°F" : day.avgTempC + "°C"}</Text></Text>
-								<Text>Low: <Text color="green">{tempScale === TempScale.Fahrenheit ? day.minTempF + "°F" : day.minTempC + "°C"}</Text></Text>
-								<Text>Rain: <Text color="green">{day.dailyWillItRain}</Text></Text>
-								<Text>Rain Chance: <Text color="green">{day.dailyChanceOfRain}%</Text></Text>
-							</Box>
-							<Box
-								flexDirection="column"
-								paddingTop={0}
-								paddingLeft={1}
-								paddingRight={1}
-							>
-								<Text color="green">🌅 {day.astro.sunrise} 🌇 {day.astro.sunset}</Text>
-							</Box>
-							<Box
-								flexDirection="column"
-								paddingTop={1}
-								paddingLeft={1}
-								paddingRight={1}
-							>
-								<Text color="green"><MoonPhaseIcon moonPhaseType={day.astro.moonPhase}/></Text>
+								<Box justifyContent="center" padding={1}>
+										<Text bold color="greenBright">
+											Forecast
+										</Text>
+									</Box>
+								<Text>
+									Condition: <Text color="green">{day.condition}</Text>
+								</Text>
+								<Text>
+									High:{" "}
+									<Text color="green">
+										{tempScale === TempScale.Fahrenheit
+											? day.maxTempF + "°F"
+											: day.maxTempC + "°C"}
+									</Text>
+								</Text>
+								<Text>
+									Avg:{" "}
+									<Text color="green">
+										{tempScale === TempScale.Fahrenheit
+											? day.avgTempF + "°F"
+											: day.avgTempC + "°C"}
+									</Text>
+								</Text>
+								<Text>
+									Low:{" "}
+									<Text color="green">
+										{tempScale === TempScale.Fahrenheit
+											? day.minTempF + "°F"
+											: day.minTempC + "°C"}
+									</Text>
+								</Text>
+								<Text>
+									Rain: <Text color="green">{day.dailyWillItRain}</Text>
+								</Text>
+								<Text>
+									Rain Chance:{" "}
+									<Text color="green">{day.dailyChanceOfRain}%</Text>
+								</Text>
+								<Box
+									flexDirection="column"
+									paddingTop={0}
+									paddingLeft={1}
+									paddingRight={1}
+								>
+									<Box justifyContent="center" padding={1}>
+										<Text bold color="greenBright">
+											Astro
+										</Text>
+									</Box>
+									<Text color="green">🌅 {day.astro.sunrise}</Text>
+									<Box marginTop={1}>
+										<Text color="green">🌇 {day.astro.sunset}</Text>
+									</Box>
+									<Box marginTop={1}>
+										<Text color="green">
+											<MoonPhaseIcon moonPhaseType={day.astro.moonPhase} />
+										</Text>
+									</Box>
+								</Box>
 							</Box>
 						</Box>
 					);

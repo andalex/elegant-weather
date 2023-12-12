@@ -10,7 +10,6 @@ import { TempScale } from "../providers/types.js";
 import { AQI } from "./AQI.js";
 import { DailyForecast } from "./DailyForecast.js";
 
-
 export const Weather: React.FC<{}> = ({}) => {
 	const {
 		apiData: { data, status },
@@ -38,77 +37,101 @@ export const Weather: React.FC<{}> = ({}) => {
 						marginRight={1}
 						marginTop={0}
 						marginBottom={0}
-						justifyContent="space-between"
+						justifyContent="space-around"
 					>
 						<Box
-							width="25%"
+							width="15%"
 							borderStyle="single"
 							justifyContent="center"
 							paddingTop={0}
 							paddingLeft={1}
 						>
-							<Text color="blue">Condition</Text>
+							<Text color="magentaBright">Condition</Text>
 						</Box>
 
 						<Box
-							width="25%"
+							width="15%"
 							borderStyle="single"
 							justifyContent="center"
 							paddingTop={0}
 							paddingLeft={1}
 						>
-							<Text color="blue">
+							<Text color="magentaBright">
 								Temp {tempScale === TempScale.Fahrenheit ? "°F" : "°C"}
 							</Text>
 						</Box>
 
 						<Box
-							width="25%"
+							width="15%"
 							borderStyle="single"
 							justifyContent="center"
 							paddingTop={0}
 							paddingLeft={1}
 						>
-							<Text color="blue">
+							<Text color="magentaBright">
 								Feels Like {tempScale === TempScale.Fahrenheit ? "°F" : "°C"}
 							</Text>
 						</Box>
 						<Box
-							width="25%"
+							width="15%"
 							borderStyle="single"
 							justifyContent="center"
 							paddingTop={0}
 							paddingLeft={1}
 						>
-							<Text color="blue">Wind</Text>
+							<Text color="magentaBright">Wind</Text>
 						</Box>
 					</Box>
 					{/* ROW */}
-					<Box marginLeft={1} marginRight={1} marginTop={0} marginBottom={0}>
+					<Box
+						marginLeft={1}
+						marginRight={1}
+						marginTop={0}
+						marginBottom={0}
+						justifyContent="space-around"
+					>
 						<Box
-							width="25%"
+							width="15%"
+							alignItems="center"
 							borderStyle="round"
 							paddingTop={0}
-							paddingLeft={1}
 							flexDirection="column"
 						>
 							<Text color="green">{data.current.condition}</Text>
 						</Box>
-						<Box width="25%" borderStyle="round" paddingTop={0} paddingLeft={1}>
+						<Box
+							width="15%"
+							alignItems="center"
+							borderStyle="round"
+							paddingTop={0}
+							flexDirection="column"
+						>
 							{tempScale === TempScale.Fahrenheit ? (
 								<Text color="green">{data.current.tempF}</Text>
 							) : (
 								<Text color="green">{data.current.tempC}</Text>
 							)}
 						</Box>
-						<Box width="25%" borderStyle="round" paddingTop={0} paddingLeft={1}>
+						<Box
+							width="15%"
+							alignItems="center"
+							borderStyle="round"
+							paddingTop={0}
+							flexDirection="column"
+						>
 							{tempScale === TempScale.Fahrenheit ? (
 								<Text color="green">{data.current.feelsLikeF}</Text>
 							) : (
 								<Text color="green">{data.current.feelsLikeC}</Text>
 							)}
 						</Box>
-						<Box width="25%" borderStyle="round" paddingTop={0} paddingLeft={1}>
+						<Box
+							width="15%"
+							alignItems="center"
+							borderStyle="round"
+							paddingTop={0}
+							flexDirection="column"
+						>
 							<Text color="green">{data.current.windMPH}MPH</Text>
 						</Box>
 					</Box>
@@ -116,7 +139,7 @@ export const Weather: React.FC<{}> = ({}) => {
 						<DailyForecast />
 					</Box>
 					<Box marginLeft={1} marginRight={1} marginTop={0} marginBottom={0}>
-						<AQI location={data.location} aqi={data.current.aqi}/>
+						<AQI location={data.location} aqi={data.current.aqi} />
 					</Box>
 				</Box>
 			)}

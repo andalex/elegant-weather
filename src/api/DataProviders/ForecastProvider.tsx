@@ -5,7 +5,7 @@ import { createDataHook } from "./CreateDataHook.js";
 import { handleApiRequeset } from "../handleApiRequest.js";
 import { useWeatherOptions } from "../../providers/WeatherOptionsProvider.js";
 
-const QUERY_DEFAULTS = { aqi: "yes", alerts: "yes" };
+const DEFAULT_CITY = "Portland, OR";
 
 const ForecastContext = createContext<TDataContextState | null>(null);
 
@@ -19,6 +19,7 @@ export const ForecastProvider = (props: PropsWithChildren ) => {
   const { forecastDays } = useWeatherOptions();
 
   const getForecast = async (query: TQuery) => {
+    console.log(forecastDays);
     await handleApiRequeset(
       API_METHODS.getForecast,
       { q: query.q, aqi: "yes", alerts: "yes", days: forecastDays },
@@ -29,7 +30,7 @@ export const ForecastProvider = (props: PropsWithChildren ) => {
   // Fetch initial data
   useEffect(() => {
     (async (): Promise<void> => {
-      await getForecast({ q: "Portland, OR" })
+      await getForecast({ q: DEFAULT_CITY })
     })();
   }, []);
 
