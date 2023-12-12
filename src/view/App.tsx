@@ -9,9 +9,9 @@ export const App = () => {
   return (
 		<WeatherOptionsProvider>
 			<ForecastProvider>
-          <Header />
-          <WeatherSelector />
-          <Weather />
+				<Header />
+				<WeatherSelector />
+				<Weather />
 			</ForecastProvider>
 		</WeatherOptionsProvider>
 	);

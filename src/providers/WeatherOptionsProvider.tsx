@@ -3,9 +3,11 @@ import { TempScale, TWeatherOptionsContextState, LOCATION_QUERY_DEFAULT } from '
 
 const WeatherOptionsContext = createContext<TWeatherOptionsContextState>({
     locationQuery: LOCATION_QUERY_DEFAULT,
-    setLocationQuery: (): void => {},
+    setLocationQuery: ():void => {},
     tempScale: TempScale.Fahrenheit,
-    setTempScale: ():void => {}
+    setTempScale: ():void => {},
+    forecastDays: "3",
+    setForecastDays: ():void => {}
 });
 
 
@@ -23,9 +25,10 @@ export const useWeatherOptions = () => {
 export function WeatherOptionsProvider({ children }) {
     const [tempScale, setTempScale] = useState(TempScale.Fahrenheit);
     const [locationQuery, setLocationQuery] = useState(LOCATION_QUERY_DEFAULT);
+    const [forecastDays, setForecastDays] = useState("3");
 
     return (
-        <WeatherOptionsContext.Provider value={{ tempScale, setTempScale, locationQuery, setLocationQuery}}>
+        <WeatherOptionsContext.Provider value={{ tempScale, setTempScale, locationQuery, setLocationQuery, forecastDays, setForecastDays}}>
             {children}
         </WeatherOptionsContext.Provider>
     )

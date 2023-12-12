@@ -55,11 +55,12 @@ export type TQuery = {
   alerts?: "yes" | "no";
   aqi?: "yes" | "no";
   tides?: "yes" | "no";
-  tp?: string;
+  tz?: string;
   lang?: Languages;
 };
 
 export type TApiData = {
   data: { [key: string]: string | number };
   status: number;
+  error?: any;
 };

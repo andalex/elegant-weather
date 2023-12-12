@@ -12,5 +12,7 @@ export type TWeatherOptionsContextState = |
         tempScale: TempScale.Fahrenheit | TempScale.Celsius,
         setTempScale: Dispatch<SetStateAction<TempScale>>,
         locationQuery: string,
-        setLocationQuery: Dispatch<SetStateAction<string>>
+        setLocationQuery: Dispatch<SetStateAction<string>>,
+        forecastDays: string,
+        setForecastDays: Dispatch<SetStateAction<string>>,
     }

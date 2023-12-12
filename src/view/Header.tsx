@@ -7,7 +7,7 @@ export const Header = () => {
 			text="Elegant Weather"
 			font="chrome"
 			align="center"
-			colors={["red", "greenBright", "cyan"]}
+			colors={["cyan", "greenBright"]}
 		/>
 	);
 }

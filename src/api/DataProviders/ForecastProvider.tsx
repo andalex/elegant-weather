@@ -1,33 +1,40 @@
 import React, { createContext, useState, useEffect, PropsWithChildren } from "react";
-import { TDataContextState } from "./types.js";
-import { API_STATUS, API_METHODS } from "../types.js";
+import { TDataContextState, TForecastApiData } from "./types.js";
+import { API_STATUS, API_METHODS, TQuery } from "../types.js";
 import { createDataHook } from "./CreateDataHook.js";
 import { handleApiRequeset } from "../handleApiRequest.js";
+import { useWeatherOptions } from "../../providers/WeatherOptionsProvider.js";
+
+const QUERY_DEFAULTS = { aqi: "yes", alerts: "yes" };
 
 const ForecastContext = createContext<TDataContextState | null>(null);
 
 export const useForecast = createDataHook(ForecastContext);
 
 export const ForecastProvider = (props: PropsWithChildren ) => {
-  const [state, setState] = useState<TDataContextState>({
+  const [apiDataState, setApiDataState] = useState<TForecastApiData>({
     status: API_STATUS.LOADING,
     data: null,
   });
+  const { forecastDays } = useWeatherOptions();
 
+  const getForecast = async (query: TQuery) => {
+    await handleApiRequeset(
+      API_METHODS.getForecast,
+      { q: query.q, aqi: "yes", alerts: "yes", days: forecastDays },
+      setApiDataState,
+    );
+  }
+
+  // Fetch initial data
   useEffect(() => {
     (async (): Promise<void> => {
-      await handleApiRequeset(
-        API_METHODS.getForecast,
-        { q: "portland", aqi: "yes", alerts: "yes", days: "5" },
-        setState,
-      );
+      await getForecast({ q: "Portland, OR" })
     })();
-
-    // Empty useEffect dependency array, run onMount.
   }, []);
 
   return (
-    <ForecastContext.Provider value={state}>
+    <ForecastContext.Provider value={{ apiData: apiDataState, getForecast }}>
       {props.children}
     </ForecastContext.Provider>
   );
