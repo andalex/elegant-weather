@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Box, Text } from "ink";
+import { Text } from "ink";
+import { useTheme } from "../providers/ThemeProvider.js";
 
 type TTimeProps = {
 	tz: string;
@@ -7,6 +8,8 @@ type TTimeProps = {
 
 //TODO get timeZone working for local time for the weather being looked up.
 export const Time = (props: TTimeProps) => {
+	const {theme: { styles }} = useTheme();
+
 	const [time, setTime] = useState(
 		new Date().toLocaleString("en-US", {
 			hour: "numeric",
@@ -33,5 +36,5 @@ export const Time = (props: TTimeProps) => {
 		return () => clearInterval(timeInterval);
 	}, []);
 
-	return <Text color="cyan">{time}</Text>;
+	return <Text color={styles.primaryAccent}>{time}</Text>;
 };

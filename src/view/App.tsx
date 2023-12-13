@@ -11,16 +11,7 @@ export const App = () => {
 		<WeatherOptionsProvider>
 			<ForecastProvider>
 				<ThemeProvider>
-					<Box
-						flexDirection="column"
-						width="100%"
-						padding={1}
-						borderStyle="classic"
-						justifyContent="center"
-					>
-						<Header />
-						<Weather />
-					</Box>
+					<Weather />
 				</ThemeProvider>
 			</ForecastProvider>
 		</WeatherOptionsProvider>

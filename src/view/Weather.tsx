@@ -7,31 +7,42 @@ import { API_STATUS } from "../api/types.js";
 import { ConditionIcon } from "./ConditionIcon.js";
 import { useWeatherOptions } from "../providers/WeatherOptionsProvider.js";
 import { TempScale } from "../providers/types.js";
+import { Header } from "./Header.js";
 import { AQI } from "./AQI.js";
 import { DailyForecast } from "./DailyForecast.js";
 import { WeatherOptions } from "./WeatherOptions.js";
 import { Time } from "./Time.js";
-
+import { useTheme } from "../providers/ThemeProvider.js";
 
 export const Weather: React.FC<{}> = ({}) => {
 	const {
 		apiData: { data, status },
 	} = useForecast();
 	const { tempScale } = useWeatherOptions();
+	const { theme: { styles } } = useTheme();
 
 	return (
-		<>
+		<Box
+			flexDirection="column"
+			width="100%"
+			padding={1}
+			borderStyle={styles.primaryBorderStyle}
+			justifyContent="center"
+		>
+			<Box width="100%" flexDirection="row" justifyContent="center">
+				<Header />
+			</Box>
 			{status === API_STATUS.LOADING ? (
-				<Text color="cyan">
+				<Text color={styles.primaryAccent}>
 					Loading weather <Spinner type="weather" />
 				</Text>
 			) : (
 				<>
 					<Box justifyContent="center" padding={1}>
-						<Text bold color="greenBright">
+						<Text bold color={styles.primaryElement}>
 							Current Conditions for {data.location.city},{" "}
-							{data.location.region}{" "}<Time tz={data.location.tz}/>
-						</Text>					
+							{data.location.region} <Time tz={data.location.tz} />
+						</Text>
 					</Box>
 					{/* ROW */}
 					<Box
@@ -43,45 +54,45 @@ export const Weather: React.FC<{}> = ({}) => {
 					>
 						<Box
 							width="15%"
-							borderStyle="single"
+							borderStyle={styles.tertiaryBorderStyle}
 							justifyContent="center"
 							paddingTop={0}
 							paddingLeft={1}
 						>
-							<Text color="magentaBright">Condition</Text>
+							<Text color={styles.tertiaryElement}>Condition</Text>
 						</Box>
 
 						<Box
 							width="15%"
-							borderStyle="single"
+							borderStyle={styles.tertiaryBorderStyle}
 							justifyContent="center"
 							paddingTop={0}
 							paddingLeft={1}
 						>
-							<Text color="magentaBright">
+							<Text color={styles.tertiaryElement}>
 								Temp {tempScale === TempScale.Fahrenheit ? "°F" : "°C"}
 							</Text>
 						</Box>
 
 						<Box
 							width="15%"
-							borderStyle="single"
+							borderStyle={styles.tertiaryBorderStyle}
 							justifyContent="center"
 							paddingTop={0}
 							paddingLeft={1}
 						>
-							<Text color="magentaBright">
+							<Text color={styles.tertiaryElement}>
 								Feels Like {tempScale === TempScale.Fahrenheit ? "°F" : "°C"}
 							</Text>
 						</Box>
 						<Box
 							width="15%"
-							borderStyle="single"
+							borderStyle={styles.tertiaryBorderStyle}
 							justifyContent="center"
 							paddingTop={0}
 							paddingLeft={1}
 						>
-							<Text color="magentaBright">Wind</Text>
+							<Text color={styles.tertiaryElement}>Wind</Text>
 						</Box>
 					</Box>
 					{/* ROW */}
@@ -95,46 +106,46 @@ export const Weather: React.FC<{}> = ({}) => {
 						<Box
 							width="15%"
 							alignItems="center"
-							borderStyle="round"
+							borderStyle={styles.secondaryBorderStyle}
 							paddingTop={0}
 							flexDirection="column"
 						>
-							<Text color="green">{data.current.condition}</Text>
+							<Text color={styles.secondaryElement}>{data.current.condition}</Text>
 						</Box>
 						<Box
 							width="15%"
 							alignItems="center"
-							borderStyle="round"
+							borderStyle={styles.secondaryBorderStyle}
 							paddingTop={0}
 							flexDirection="column"
 						>
 							{tempScale === TempScale.Fahrenheit ? (
-								<Text color="green">{data.current.tempF}</Text>
+								<Text color={styles.secondaryElement}>{data.current.tempF}</Text>
 							) : (
-								<Text color="green">{data.current.tempC}</Text>
+								<Text color={styles.secondaryElement}>{data.current.tempC}</Text>
 							)}
 						</Box>
 						<Box
 							width="15%"
 							alignItems="center"
-							borderStyle="round"
+							borderStyle={styles.secondaryBorderStyle}
 							paddingTop={0}
 							flexDirection="column"
 						>
 							{tempScale === TempScale.Fahrenheit ? (
-								<Text color="green">{data.current.feelsLikeF}</Text>
+								<Text color={styles.secondaryElement}>{data.current.feelsLikeF}</Text>
 							) : (
-								<Text color="green">{data.current.feelsLikeC}</Text>
+								<Text color={styles.secondaryElement}>{data.current.feelsLikeC}</Text>
 							)}
 						</Box>
 						<Box
 							width="15%"
 							alignItems="center"
-							borderStyle="round"
+							borderStyle={styles.secondaryBorderStyle}
 							paddingTop={0}
 							flexDirection="column"
 						>
-							<Text color="green">{data.current.windMPH}MPH</Text>
+							<Text color={styles.secondaryElement}>{data.current.windMPH}MPH</Text>
 						</Box>
 					</Box>
 					<DailyForecast />
@@ -142,6 +153,6 @@ export const Weather: React.FC<{}> = ({}) => {
 					<WeatherOptions />
 				</>
 			)}
-		</>
+		</Box>
 	);
 };

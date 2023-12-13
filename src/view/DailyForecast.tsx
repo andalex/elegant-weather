@@ -6,6 +6,7 @@ import { useForecast } from "../api/DataProviders/ForecastProvider.js";
 import { useWeatherOptions } from "../providers/WeatherOptionsProvider.js";
 import { TempScale } from "../providers/types.js";
 import { API_STATUS } from "../api/types.js";
+import { useTheme } from "../providers/ThemeProvider.js";
 
 type Props = {};
 
@@ -14,17 +15,18 @@ export const DailyForecast = () => {
 		apiData: { data, status },
 	} = useForecast();
 	const { forecastDays, tempScale } = useWeatherOptions();
+	const { theme: { styles } } = useTheme();
 
 	return (
-		<Box flexDirection="column" width="100%" borderStyle="round">
+		<Box flexDirection="column" width="100%" borderStyle={styles.secondaryBorderStyle}>
 			<Box justifyContent="center" padding={1}>
-				<Text bold color="greenBright">
+				<Text bold color={styles.primaryElement}>
 					{forecastDays} Day Forecast
 				</Text>
 			</Box>
 			{/* ROW */}
 			{status === API_STATUS.LOADING ? (
-				<Text color="cyan">
+				<Text color={styles.primaryAccent}>
 					Loading Daily Forecast <Spinner type="weather" />
 				</Text>
 			) : (
@@ -38,58 +40,58 @@ export const DailyForecast = () => {
 						return (
 							<Box flexDirection="column" height="100%" key={day.dayId}>
 								<Box
-									borderStyle="single"
+									borderStyle={styles.tertiaryBorderStyle}
 									justifyContent="center"
 									paddingTop={0}
 									paddingLeft={1}
 									paddingRight={1}
 								>
-									<Text color="magentaBright">
+									<Text color={styles.tertiaryElement}>
 										{index === 0
 											? `Today ${day.dayReadable.shortFormat}`
 											: `${day.dayReadable.dayName} ${day.dayReadable.shortFormat}`}
 									</Text>
 								</Box>
 								<Box
-									borderStyle="round"
+									borderStyle={styles.secondaryBorderStyle}
 									flexDirection="column"
 									paddingTop={0}
 									paddingLeft={1}
 									paddingRight={1}
 								>
 									<Box justifyContent="center" padding={1}>
-										<Text bold color="greenBright">
+										<Text bold color={styles.primaryElement}>
 											Forecast
 										</Text>
 									</Box>
 									<Box marginBottom={1} justifyContent="center">
-										<Text color="cyan">{day.condition}</Text>
+										<Text color={styles.primaryAccent}>{day.condition}</Text>
 									</Box>
 									<Box marginBottom={1} justifyContent="center">
-										<Text color="green">
+										<Text color={styles.secondaryElement}>
 											{tempScale === TempScale.Fahrenheit
 												? day.maxTempF + "°F"
 												: day.maxTempC + "°C"}
 											{" - "}
 										</Text>
-										<Text color="green">
+										<Text color={styles.secondaryElement}>
 											{tempScale === TempScale.Fahrenheit
 												? day.minTempF + "°F"
 												: day.minTempC + "°C"}
 										</Text>
 									</Box>
 									<Text>
-										<Text color="green">{day.dailyWillItRain}</Text>
+										<Text color={styles.secondaryElement}>{day.dailyWillItRain}</Text>
 									</Text>
 									<Box marginBottom={1} justifyContent="center">
 										{day.dailyWillItRain && (
 											<Text>
-												💧 <Text color="green">{day.dailyChanceOfRain}%</Text>{' '}
+												💧 <Text color={styles.secondaryElement}>{day.dailyChanceOfRain}%</Text>{' '}
 											</Text>
 										)}
 										{day.dailyWillItSnow && (
 											<Text>
-												⛄️ <Text color="green">{day.dailyChanceOfSnow}%</Text>
+												⛄️ <Text color={styles.secondaryElement}>{day.dailyChanceOfSnow}%</Text>
 											</Text>
 										)}
 									</Box>
@@ -100,16 +102,16 @@ export const DailyForecast = () => {
 										paddingRight={1}
 									>
 										<Box justifyContent="center" padding={1}>
-											<Text bold color="greenBright">
+											<Text bold color={styles.primaryElement}>
 												Astro
 											</Text>
 										</Box>
-										<Text color="green">🌅 {day.astro.sunrise}</Text>
+										<Text color={styles.secondaryElement}>🌅 {day.astro.sunrise}</Text>
 										<Box marginTop={1}>
-											<Text color="green">🌇 {day.astro.sunset}</Text>
+											<Text color={styles.secondaryElement}>🌇 {day.astro.sunset}</Text>
 										</Box>
 										<Box marginTop={1}>
-											<Text color="green">
+											<Text color={styles.secondaryElement}>
 												<MoonPhaseIcon moonPhaseType={day.astro.moonPhase} />
 											</Text>
 										</Box>

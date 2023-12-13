@@ -6,6 +6,7 @@ import TextInput from "ink-text-input";
 import { useWeatherOptions } from "../providers/WeatherOptionsProvider.js";
 import { HeaderFonts, TempScale } from "../providers/types.js";
 import { useForecast } from "../api/DataProviders/ForecastProvider.js";
+import { useTheme } from "../providers/ThemeProvider.js";
 
 type TWeatherLocationProps = {
 	id: string;
@@ -15,16 +16,17 @@ const WeatherLocationInput = (props: TWeatherLocationProps) => {
 	const { getForecast } = useForecast();
 	const { locationQuery, setLocationQuery } = useWeatherOptions();
 	const { isFocused } = useFocus({ id: props.id });
+	const { theme: { styles } } = useTheme();
 
 	return (
 		<Box flexDirection="column" margin={1}>
-			<Text color={isFocused ? "greenBright" : "white"}>Weather Location</Text>
+			<Text color={isFocused ? styles.primaryElement : styles.secondaryAccent }>Weather Location</Text>
 			<Box
 				flexDirection="column"
 				margin={0}
 				padding={0}
-				borderStyle={isFocused ? "double" : "round"}
-				borderColor={isFocused ? "green" : "white"}
+				borderStyle={isFocused ? styles.tertiaryBorderStyle : styles.secondaryBorderStyle}
+				borderColor={isFocused ? styles.secondaryElement : styles.secondaryAccent}
 			>
 				{/* Change this to call getForecast when the locationQuery state changes, use a debounce */}
 				<TextInput
@@ -46,16 +48,17 @@ type TTempScaleSelectProps = {
 const TempScaleSelect = (props: TTempScaleSelectProps) => {
 	const { tempScale, setTempScale } = useWeatherOptions();
 	const { isFocused } = useFocus({ id: props.id });
+	const { theme: { styles } } = useTheme();
 
 	return (
 		<Box flexDirection="column" margin={1}>
-			<Text color={isFocused ? "greenBright" : "white"}>Temp Scale</Text>
+			<Text color={isFocused ? styles.primaryElement : styles.secondaryAccent}>Temp Scale</Text>
 			<Box
 				flexDirection="column"
 				margin={0}
 				padding={0}
-				borderStyle={isFocused ? "double" : "round"}
-				borderColor={isFocused ? "green" : "white"}
+				borderStyle={isFocused ? styles.tertiaryBorderStyle : styles.secondaryBorderStyle}
+				borderColor={isFocused ? styles.primaryElement : styles.secondaryAccent}
 			>
 				<SelectInput
 					initialIndex={tempScale === TempScale.Fahrenheit ? 0 : 1}
@@ -81,6 +84,7 @@ const TempScaleSelect = (props: TTempScaleSelectProps) => {
 const HeaderFontSelect = (props: TTempScaleSelectProps) => {
 	const { headerFont, setHeaderFont } = useWeatherOptions();
 	const { isFocused } = useFocus({ id: props.id });
+	const { theme: { styles } } = useTheme();
 
 	// TODO make this simpler
 	const fontItems = [
@@ -115,13 +119,13 @@ const HeaderFontSelect = (props: TTempScaleSelectProps) => {
 	];
 	return (
 		<Box flexDirection="column" margin={1}>
-			<Text color={isFocused ? "greenBright" : "white"}>Header Font</Text>
+			<Text color={isFocused ? styles.primaryElement : styles.secondaryAccent}>Header Font</Text>
 			<Box
 				flexDirection="column"
 				margin={0}
 				padding={0}
-				borderStyle={isFocused ? "double" : "round"}
-				borderColor={isFocused ? "green" : "white"}
+				borderStyle={isFocused ? styles.tertiaryBorderStyle : styles.secondaryBorderStyle}
+				borderColor={isFocused ? styles.primaryElement : styles.secondaryAccent}
 			>
 				<SelectInput
 					initialIndex={fontItems.findIndex(
@@ -140,6 +144,7 @@ const HeaderFontSelect = (props: TTempScaleSelectProps) => {
 const ForecastDaysInput = (props: TWeatherLocationProps) => {
 	const { forecastDays, setForecastDays } = useWeatherOptions();
 	const { isFocused } = useFocus({ id: props.id });
+	const { theme: { styles } } = useTheme();
 
 	const forecastDaysItems = [
 		{ label: "5", value: "5" },
@@ -148,15 +153,16 @@ const ForecastDaysInput = (props: TWeatherLocationProps) => {
 		{ label: "2", value: "2" },
 		{ label: "1", value: "1" },
 	];
+
 	return (
 		<Box flexDirection="column" margin={1}>
-			<Text color={isFocused ? "greenBright" : "white"}>Forecast Days</Text>
+			<Text color={isFocused ? styles.primaryElement : styles.secondaryAccent}>Forecast Days</Text>
 			<Box
 				flexDirection="column"
 				margin={0}
 				padding={0}
-				borderStyle={isFocused ? "double" : "round"}
-				borderColor={isFocused ? "green" : "white"}
+				borderStyle={isFocused ? styles.tertiaryBorderStyle : styles.secondaryBorderStyle}
+				borderColor={isFocused ? styles.primaryElement : styles.secondaryAccent}
 			>
 				<SelectInput
 					items={forecastDaysItems}
@@ -181,6 +187,7 @@ type TToggleWeatherOptionsProps = {
 const ToggleWeatherOptions = (props: TToggleWeatherOptionsProps) => {
 	const { isFocused } = useFocus({ id: props.id });
 	const { focus } = useFocusManager();
+	const { theme: { styles } } = useTheme();
 
 	useEffect(() => {
 		focus(props.id);
@@ -189,14 +196,14 @@ const ToggleWeatherOptions = (props: TToggleWeatherOptionsProps) => {
 	return (
 		<Box flexDirection="column" width="15%">
 			<Box justifyContent="center" padding={1}>
-				<Text color={isFocused ? "greenBright" : "white"}>Show Options</Text>
+				<Text color={isFocused ? styles.primaryElement : styles.secondaryAccent}>Show Options</Text>
 			</Box>
 			<Box
 				flexDirection="column"
 				paddingLeft={1}
 				paddingRight={1}
-				borderStyle={isFocused ? "double" : "round"}
-				borderColor={isFocused ? "green" : "white"}
+				borderStyle={isFocused ? styles.tertiaryBorderStyle : styles.secondaryBorderStyle}
+				borderColor={isFocused ? styles.primaryElement : styles.secondaryAccent}
 			>
 				<SelectInput
 					items={[
@@ -214,6 +221,7 @@ const ToggleWeatherOptions = (props: TToggleWeatherOptionsProps) => {
 
 export const WeatherOptions = () => {
 	const [isOpen, setIsOpen] = useState(false);
+	const { theme: { styles } } = useTheme();
 
 	return (
 		<>
@@ -229,7 +237,7 @@ export const WeatherOptions = () => {
 				{isOpen && (
 					<>
 						<Box justifyContent="center" padding={1}>
-							<Text bold color="greenBright">
+							<Text bold color={styles.primaryElement}>
 								Weather Options
 							</Text>
 						</Box>
@@ -240,7 +248,7 @@ export const WeatherOptions = () => {
 							<HeaderFontSelect id="5" />
 						</Box>
 						<Box justifyContent="center">
-							<Text bold color="greenBright">
+							<Text bold color={styles.primaryElement}>
 								TAB: {"->"} / SHIFT+TAB: {"<-"} / ENTER to select
 							</Text>
 						</Box>
