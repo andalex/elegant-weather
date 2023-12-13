@@ -9,6 +9,9 @@ import { useWeatherOptions } from "../providers/WeatherOptionsProvider.js";
 import { TempScale } from "../providers/types.js";
 import { AQI } from "./AQI.js";
 import { DailyForecast } from "./DailyForecast.js";
+import { WeatherOptions } from "./WeatherOptions.js";
+import { Time } from "./Time.js";
+
 
 export const Weather: React.FC<{}> = ({}) => {
 	const {
@@ -23,13 +26,12 @@ export const Weather: React.FC<{}> = ({}) => {
 					Loading weather <Spinner type="weather" />
 				</Text>
 			) : (
-				<Box flexDirection="column" width="100%" borderStyle="classic">
+				<>
 					<Box justifyContent="center" padding={1}>
 						<Text bold color="greenBright">
 							Current Conditions for {data.location.city},{" "}
-							{data.location.region}{" "}
-							<ConditionIcon conditionType={data.current.conditionType} />
-						</Text>
+							{data.location.region}{" "}<Time tz={data.location.tz}/>
+						</Text>					
 					</Box>
 					{/* ROW */}
 					<Box
@@ -37,7 +39,7 @@ export const Weather: React.FC<{}> = ({}) => {
 						marginRight={1}
 						marginTop={0}
 						marginBottom={0}
-						justifyContent="space-around"
+						justifyContent="center"
 					>
 						<Box
 							width="15%"
@@ -88,7 +90,7 @@ export const Weather: React.FC<{}> = ({}) => {
 						marginRight={1}
 						marginTop={0}
 						marginBottom={0}
-						justifyContent="space-around"
+						justifyContent="center"
 					>
 						<Box
 							width="15%"
@@ -135,13 +137,10 @@ export const Weather: React.FC<{}> = ({}) => {
 							<Text color="green">{data.current.windMPH}MPH</Text>
 						</Box>
 					</Box>
-					<Box marginLeft={1} marginRight={1} marginTop={0} marginBottom={0}>
-						<DailyForecast />
-					</Box>
-					<Box marginLeft={1} marginRight={1} marginTop={0} marginBottom={0}>
-						<AQI location={data.location} aqi={data.current.aqi} />
-					</Box>
-				</Box>
+					<DailyForecast />
+					<AQI location={data.location} aqi={data.current.aqi} />
+					<WeatherOptions />
+				</>
 			)}
 		</>
 	);

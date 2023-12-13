@@ -16,10 +16,9 @@ export const ForecastProvider = (props: PropsWithChildren ) => {
     status: API_STATUS.LOADING,
     data: null,
   });
-  const { forecastDays } = useWeatherOptions();
+  const { forecastDays, locationQuery } = useWeatherOptions();
 
   const getForecast = async (query: TQuery) => {
-    console.log(forecastDays);
     await handleApiRequeset(
       API_METHODS.getForecast,
       { q: query.q, aqi: "yes", alerts: "yes", days: forecastDays },
@@ -33,6 +32,13 @@ export const ForecastProvider = (props: PropsWithChildren ) => {
       await getForecast({ q: DEFAULT_CITY })
     })();
   }, []);
+
+  //TODO see if you can conviently combine these two side effects
+  useEffect(() => {
+    (async (): Promise<void> => {
+      await getForecast({ q: locationQuery, aqi: 'yes', alerts: 'yes', days: forecastDays });
+    })();
+  }, [forecastDays])
 
   return (
     <ForecastContext.Provider value={{ apiData: apiDataState, getForecast }}>

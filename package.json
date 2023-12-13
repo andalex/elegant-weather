@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"bin": {
-		"elegant-weather": "dist/src/main.js"
+		"elegant-weather": "dist/main.js"
 	},
 	"type": "module",
 	"engines": {
@@ -12,7 +12,7 @@
 	"scripts": {
 		"build": "tsc",
 		"dev": "tsc --watch",
-		"dev:cli": "node dist/src/main.js",
+		"dev:cli": "node dist/main.js",
 		"test": "prettier --check . && xo && ava"
 	},
 	"files": [

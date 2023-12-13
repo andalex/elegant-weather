@@ -1,18 +1,28 @@
 import React from "react";
+import { Box } from "ink";
 import { ForecastProvider } from "../api/DataProviders/ForecastProvider.js";
 import { WeatherOptionsProvider } from "../providers/WeatherOptionsProvider.js";
-import { Header } from './Header.js'
+import { ThemeProvider } from "../providers/ThemeProvider.js";
+import { Header } from "./Header.js";
 import { Weather } from "./Weather.js";
-import { WeatherSelector } from "./WeatherSelector.js";
 
 export const App = () => {
-  return (
+	return (
 		<WeatherOptionsProvider>
 			<ForecastProvider>
-				<Header />
-				<WeatherSelector />
-				<Weather />
+				<ThemeProvider>
+					<Box
+						flexDirection="column"
+						width="100%"
+						padding={1}
+						borderStyle="classic"
+						justifyContent="center"
+					>
+						<Header />
+						<Weather />
+					</Box>
+				</ThemeProvider>
 			</ForecastProvider>
 		</WeatherOptionsProvider>
 	);
-}
+};

@@ -55,7 +55,7 @@ type TAQIProps = {
 
 export const AQI = (props: TAQIProps) => {
 	return (
-		<Box flexDirection="column" width="100%" borderStyle="classic">
+		<Box flexDirection="column" width="100%" borderStyle="round">
             {/* Make box header component */}
 			<Box justifyContent="center" padding={1}>
                 <Text bold color="greenBright">
@@ -64,11 +64,11 @@ export const AQI = (props: TAQIProps) => {
             </Box>
 			<Box flexDirection="row" margin={1} width="100%" justifyContent="center">
                 <Box flexDirection="row" width="auto" justifyContent="center" borderColor="greenBright" borderStyle="round">
-                    <Text color="#ff7e00">EPA Index: </Text><AQIIndex index={props.aqi.index} />
+                    <Text color="green">EPA Index: </Text><AQIIndex index={props.aqi.index} />
                 </Box>
 			</Box>          
 			<Box flexDirection="row" width="100%" justifyContent="center">
-				<Text color="#ff7e00">
+				<Text color="green">
 					PM10: <Text backgroundColor="gray">{props.aqi.pm10}</Text>{" "}
 					PM2.5: <Text backgroundColor="gray">{props.aqi.pm25}</Text>{" "}
                     Carbon Monoxide: <Text backgroundColor="gray">{props.aqi.co}</Text>{" "}

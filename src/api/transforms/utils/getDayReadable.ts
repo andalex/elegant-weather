@@ -1,14 +1,35 @@
-export const getDayReadable = (date: Date) => {
-	const dayMap = {
-		0: "Sunday",
-		1: "Monday",
-		2: "Tuesday",
-		3: "Wednesday",
-		4: "Thursday",
-		5: "Friday",
-		6: "Saturday",
-	};
-	const dayIndex = new Date(date).getDay();
+enum Days {
+	Sunday = "Sunday",
+	Monday = "Monday",
+	Tuesday = "Tuesday",
+	Wednesday = "Wednesday",
+	Thursday = "Thursday",
+	Friday = "Friday",
+	Saturday = "Saturday",
+};
 
-	return dayMap[dayIndex];
+export const getDayReadable = (date: string) => {
+	const dayMap = {
+		0: Days.Sunday,
+		1: Days.Monday,
+		2: Days.Tuesday,
+		3: Days.Wednesday,
+		4: Days.Thursday,
+		5: Days.Friday,
+		6: Days.Saturday,
+	};
+
+	/**
+	 * Replace '-'with '/' in date format due to an issue with Date() returning
+	 * off-by-one day with the format yyyy-mm-dd
+	 */
+	const slashFormattedDate = date.replace(/-/g, '\/');
+
+	const dayIndex = new Date(slashFormattedDate).getDay();
+
+	const splitDate = slashFormattedDate.split('/');
+
+	splitDate.shift();
+
+	return { dayName: dayMap[dayIndex], shortFormat: splitDate.join('/') };
 };

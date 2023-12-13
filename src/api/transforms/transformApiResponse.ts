@@ -2,7 +2,8 @@ import { API_METHODS } from "../types.js";
 import { v4 as uuidv4 } from "uuid";
 import { toCamelCase } from "./utils/toCamelCase.js";
 import { getDayReadable } from "./utils/getDayReadable.js";
-import { convertChanceToYesNo } from "./utils/convertChanceToYesNo.js";
+import { convertChanceToBoolean } from "./utils/convertChanceToBoolean.js";
+
 // AA Notes
 // This file serves as the main transform from the raw API data, which is very dense and detailed.
 // As I add new features to the UI, this transform will expand and require better patterns to better use the rich and detailed weather data provided.
@@ -44,10 +45,10 @@ const foreCastTransformer = (response: { [key: string]: any }) => {
 					minTempF: forecast.day.mintemp_f,
 					dailyChanceOfRain: forecast.day.daily_chance_of_rain,
 					dailyChanceOfSnow: forecast.day.daily_chance_of_snow,
-					dailyWillItRain: convertChanceToYesNo(
+					dailyWillItRain: convertChanceToBoolean(
 						forecast.day.daily_will_it_rain
 					),
-					dailyWillItSnow: convertChanceToYesNo(
+					dailyWillItSnow: convertChanceToBoolean(
 						forecast.day.daily_will_it_snow
 					),
 					astro: {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { Box, Text, useFocus, useInput, useFocusManager } from "ink";
 import SelectInput from "ink-select-input";
 import TextInput from "ink-text-input";
@@ -15,11 +15,6 @@ const WeatherLocationInput = (props: TWeatherLocationProps) => {
 	const { getForecast } = useForecast();
 	const { locationQuery, setLocationQuery } = useWeatherOptions();
 	const { isFocused } = useFocus({ id: props.id });
-	const { focus } = useFocusManager();
-
-	useEffect(() => {
-		focus("1");
-	}, []);
 
 	return (
 		<Box flexDirection="column" margin={1}>
@@ -31,6 +26,7 @@ const WeatherLocationInput = (props: TWeatherLocationProps) => {
 				borderStyle={isFocused ? "double" : "round"}
 				borderColor={isFocused ? "green" : "white"}
 			>
+				{/* Change this to call getForecast when the locationQuery state changes, use a debounce */}
 				<TextInput
 					value={locationQuery}
 					placeholder="Enter Location"
@@ -64,6 +60,8 @@ const TempScaleSelect = (props: TTempScaleSelectProps) => {
 				<SelectInput
 					initialIndex={tempScale === TempScale.Fahrenheit ? 0 : 1}
 					onSelect={(item) => setTempScale(item.value)}
+					isFocused={isFocused}
+					limit={1}
 					items={[
 						{
 							label: "°F",
@@ -84,16 +82,8 @@ const HeaderFontSelect = (props: TTempScaleSelectProps) => {
 	const { headerFont, setHeaderFont } = useWeatherOptions();
 	const { isFocused } = useFocus({ id: props.id });
 
-    // TODO make this simpler
+	// TODO make this simpler
 	const fontItems = [
-		{
-			label: HeaderFonts["3d"],
-			value: HeaderFonts["3d"],
-		},
-		{
-			label: HeaderFonts.Block,
-			value: HeaderFonts.Block,
-		},
 		{
 			label: HeaderFonts.Chrome,
 			value: HeaderFonts.Chrome,
@@ -101,10 +91,6 @@ const HeaderFontSelect = (props: TTempScaleSelectProps) => {
 		{
 			label: HeaderFonts.Grid,
 			value: HeaderFonts.Grid,
-		},
-		{
-			label: HeaderFonts.Huge,
-			value: HeaderFonts.Huge,
 		},
 		{
 			label: HeaderFonts.Pallet,
@@ -117,14 +103,6 @@ const HeaderFontSelect = (props: TTempScaleSelectProps) => {
 		{
 			label: HeaderFonts.Simple,
 			value: HeaderFonts.Simple,
-		},
-		{
-			label: HeaderFonts.Simple3D,
-			value: HeaderFonts.Simple3D,
-		},
-		{
-			label: HeaderFonts.SimpleBlock,
-			value: HeaderFonts.SimpleBlock,
 		},
 		{
 			label: HeaderFonts.Slick,
@@ -146,9 +124,13 @@ const HeaderFontSelect = (props: TTempScaleSelectProps) => {
 				borderColor={isFocused ? "green" : "white"}
 			>
 				<SelectInput
-					initialIndex={fontItems.findIndex(item => item.value === headerFont )}
+					initialIndex={fontItems.findIndex(
+						(item) => item.value === headerFont
+					)}
 					onSelect={(item) => setHeaderFont(item.value)}
+					isFocused={isFocused}
 					items={fontItems}
+					limit={1}
 				/>
 			</Box>
 		</Box>
@@ -156,10 +138,16 @@ const HeaderFontSelect = (props: TTempScaleSelectProps) => {
 };
 
 const ForecastDaysInput = (props: TWeatherLocationProps) => {
-	const { getForecast } = useForecast();
-	const { forecastDays, locationQuery, setForecastDays } = useWeatherOptions();
+	const { forecastDays, setForecastDays } = useWeatherOptions();
 	const { isFocused } = useFocus({ id: props.id });
 
+	const forecastDaysItems = [
+		{ label: "5", value: "5" },
+		{ label: "4", value: "4" },
+		{ label: "3", value: "3" },
+		{ label: "2", value: "2" },
+		{ label: "1", value: "1" },
+	];
 	return (
 		<Box flexDirection="column" margin={1}>
 			<Text color={isFocused ? "greenBright" : "white"}>Forecast Days</Text>
@@ -170,40 +158,95 @@ const ForecastDaysInput = (props: TWeatherLocationProps) => {
 				borderStyle={isFocused ? "double" : "round"}
 				borderColor={isFocused ? "green" : "white"}
 			>
-				<TextInput
-					value={forecastDays}
-					placeholder="Enter # Days"
-					focus={isFocused}
-					// TODO find a way to not need to pass through the locationQuery here
-					// Have the provider check the state or use useMemo to see if the value has changed.
-					onSubmit={() => getForecast({ q: locationQuery })}
-					onChange={(value) => setForecastDays(value)}
+				<SelectInput
+					items={forecastDaysItems}
+					initialIndex={forecastDaysItems.findIndex(
+						(item) => item.value === forecastDays
+					)}
+					limit={1}
+					onSelect={(item) => setForecastDays(item.value)}
+					isFocused={isFocused}
 				/>
 			</Box>
 		</Box>
 	);
 };
 
-// TODO: handle field focus behavior (tab)
-export const WeatherSelector = () => {
+type TToggleWeatherOptionsProps = {
+	isOpen: boolean;
+	setIsOpen: Dispatch<SetStateAction<boolean>>;
+	id: string;
+};
+
+const ToggleWeatherOptions = (props: TToggleWeatherOptionsProps) => {
+	const { isFocused } = useFocus({ id: props.id });
+	const { focus } = useFocusManager();
+
+	useEffect(() => {
+		focus(props.id);
+	}, []);
+
 	return (
-		<Box flexDirection="column" width="100%" borderStyle="classic">
+		<Box flexDirection="column" width="15%">
 			<Box justifyContent="center" padding={1}>
-				<Text bold color="greenBright">
-					Weather Options
-				</Text>
+				<Text color={isFocused ? "greenBright" : "white"}>Show Options</Text>
 			</Box>
-			<Box flexDirection="row">
-				<WeatherLocationInput id="1" />
-				<TempScaleSelect id="2" />
-				<ForecastDaysInput id="3" />
-                <HeaderFontSelect id="4" />
-			</Box>
-			<Box justifyContent="center">
-				<Text bold color="greenBright">
-					TAB: {"->"} / SHIFT+TAB: {"<-"} / ENTER to select
-				</Text>
+			<Box
+				flexDirection="column"
+				paddingLeft={1}
+				paddingRight={1}
+				borderStyle={isFocused ? "double" : "round"}
+				borderColor={isFocused ? "green" : "white"}
+			>
+				<SelectInput
+					items={[
+						{ label: "show", value: true },
+						{ label: "hide", value: false },
+					]}
+					limit={1}
+					onSelect={(item) => props.setIsOpen(item.value)}
+					isFocused={isFocused}
+				/>
 			</Box>
 		</Box>
+	);
+};
+
+export const WeatherOptions = () => {
+	const [isOpen, setIsOpen] = useState(false);
+
+	return (
+		<>
+			<Box
+				flexDirection="column"
+				borderStyle="round"
+				marginTop={0}
+				marginBottom={0}
+			>
+				<Box flexDirection="row" width="100%" justifyContent="center">
+					<ToggleWeatherOptions isOpen={isOpen} setIsOpen={setIsOpen} id="1" />
+				</Box>
+				{isOpen && (
+					<>
+						<Box justifyContent="center" padding={1}>
+							<Text bold color="greenBright">
+								Weather Options
+							</Text>
+						</Box>
+						<Box flexDirection="row" justifyContent="center">
+							<WeatherLocationInput id="2" />
+							<TempScaleSelect id="3" />
+							<ForecastDaysInput id="4" />
+							<HeaderFontSelect id="5" />
+						</Box>
+						<Box justifyContent="center">
+							<Text bold color="greenBright">
+								TAB: {"->"} / SHIFT+TAB: {"<-"} / ENTER to select
+							</Text>
+						</Box>
+					</>
+				)}
+			</Box>
+		</>
 	);
 };

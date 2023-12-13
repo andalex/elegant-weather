@@ -1,4 +1,4 @@
-import { Languages } from "../../types/languages.js";
+import { Languages } from "../types/languages.js";
 
 export enum Methods {
   Get = "GET",

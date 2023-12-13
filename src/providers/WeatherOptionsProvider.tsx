@@ -6,6 +6,8 @@ import {
 	HeaderFonts,
 } from "./types.js";
 
+
+//TODO split out into an updateProvider and and optionsProvider
 const WeatherOptionsContext = createContext<TWeatherOptionsContextState>({
 	locationQuery: LOCATION_QUERY_DEFAULT,
 	setLocationQuery: (): void => {},
