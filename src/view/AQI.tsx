@@ -86,7 +86,7 @@ export const AQI = (props: TAQIProps) => {
 				</Box>
 			</Box>
 			<Box flexDirection="row" width="100%" justifyContent="center">
-				<Text color={styles.primaryElement}>
+				<Text color={styles.secondaryElement}>
 					PM10:{" "}
 					<Text bold backgroundColor={styles.secondaryAccent}>{" "}{props.aqi.pm10}{" "}</Text>{" "}
 					PM2.5:{" "}

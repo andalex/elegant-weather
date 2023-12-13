@@ -79,6 +79,14 @@ const TempScaleSelect = (props: TTempScaleSelectProps) => {
 					onSelect={(item) => setTempScale(item.value)}
 					isFocused={isFocused}
 					limit={1}
+					itemComponent={props => {
+						return (
+							<Text color={isFocused ? styles.primaryElement : styles.secondaryAccent}>
+								{props.label}
+							</Text>
+						)
+					}}
+					indicatorComponent={() =><Text color={isFocused ? styles.primaryElement : styles.primaryAccent}>{'> '}</Text>}
 					items={[
 						{
 							label: "°F",
@@ -151,6 +159,14 @@ const HeaderFontSelect = (props: TTempScaleSelectProps) => {
 					initialIndex={fontItems.findIndex(
 						(item) => item.value === headerFont
 					)}
+					itemComponent={props => {
+						return (
+							<Text color={isFocused ? styles.primaryElement : styles.secondaryAccent}>
+								{props.label}
+							</Text>
+						)
+					}}
+					indicatorComponent={() =><Text color={isFocused ? styles.primaryElement : styles.primaryAccent}>{'> '}</Text>}
 					onSelect={(item) => setHeaderFont(item.value)}
 					isFocused={isFocused}
 					items={fontItems}
@@ -195,6 +211,14 @@ const ForecastDaysInput = (props: TWeatherLocationProps) => {
 					initialIndex={forecastDaysItems.findIndex(
 						(item) => item.value === forecastDays
 					)}
+					itemComponent={props => {
+						return (
+							<Text color={isFocused ? styles.primaryElement : styles.secondaryAccent}>
+								{props.label}
+							</Text>
+						)
+					}}
+					indicatorComponent={() =><Text color={isFocused ? styles.primaryElement : styles.primaryAccent}>{'> '}</Text>}
 					limit={1}
 					onSelect={(item) => setForecastDays(item.value)}
 					isFocused={isFocused}
@@ -244,6 +268,14 @@ const ToggleWeatherOptions = (props: TToggleWeatherOptionsProps) => {
 						{ label: "show", value: true },
 						{ label: "hide", value: false },
 					]}
+					itemComponent={props => {
+						return (
+							<Text color={isFocused ? styles.primaryElement : styles.secondaryAccent}>
+								{props.label}
+							</Text>
+						)
+					}}
+					indicatorComponent={() =><Text color={isFocused ? styles.primaryElement : styles.primaryAccent}>{'> '}</Text>}
 					limit={1}
 					onSelect={(item) => props.setIsOpen(item.value)}
 					isFocused={isFocused}
@@ -287,6 +319,15 @@ const SelectTheme = (props: TSelectThemeProps) => {
 					initialIndex={themeItems.findIndex(
 						(item) => item.label === themeName
 					)}
+					// TODO dry this up, it's reused in all of these
+					itemComponent={props => {
+						return (
+							<Text color={isFocused ? styles.primaryElement : styles.secondaryAccent}>
+								{props.label}
+							</Text>
+						)
+					}}
+					indicatorComponent={() =><Text color={isFocused ? styles.primaryElement : styles.primaryAccent}>{'> '}</Text>}
 					limit={1}
 					onSelect={(item) => setTheme(item.value)}
 					isFocused={isFocused}
