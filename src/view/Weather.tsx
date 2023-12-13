@@ -60,7 +60,7 @@ export const Weather: React.FC<{}> = ({}) => {
 							paddingTop={0}
 							paddingLeft={1}
 						>
-							<Text color={styles.tertiaryElement}>Condition</Text>
+							<Text wrap="truncate" color={styles.tertiaryElement}>Condition</Text>
 						</Box>
 
 						<Box
@@ -71,7 +71,7 @@ export const Weather: React.FC<{}> = ({}) => {
 							paddingTop={0}
 							paddingLeft={1}
 						>
-							<Text color={styles.tertiaryElement}>
+							<Text wrap="truncate" color={styles.tertiaryElement}>
 								Temp {tempScale === TempScale.Fahrenheit ? "°F" : "°C"}
 							</Text>
 						</Box>
@@ -84,7 +84,7 @@ export const Weather: React.FC<{}> = ({}) => {
 							paddingTop={0}
 							paddingLeft={1}
 						>
-							<Text color={styles.tertiaryElement}>
+							<Text wrap="truncate" color={styles.tertiaryElement}>
 								Feels Like {tempScale === TempScale.Fahrenheit ? "°F" : "°C"}
 							</Text>
 						</Box>
@@ -96,7 +96,7 @@ export const Weather: React.FC<{}> = ({}) => {
 							paddingTop={0}
 							paddingLeft={1}
 						>
-							<Text color={styles.tertiaryElement}>Wind</Text>
+							<Text wrap="truncate" color={styles.tertiaryElement}>Wind</Text>
 						</Box>
 					</Box>
 					{/* ROW */}

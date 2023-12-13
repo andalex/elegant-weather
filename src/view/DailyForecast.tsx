@@ -47,7 +47,7 @@ export const DailyForecast = () => {
 									paddingLeft={1}
 									paddingRight={1}
 								>
-									<Text color={styles.tertiaryElement}>
+									<Text color={styles.tertiaryElement} wrap="truncate">
 										{index === 0
 											? `Today ${day.dayReadable.shortFormat}`
 											: `${day.dayReadable.dayName} ${day.dayReadable.shortFormat}`}
@@ -113,7 +113,7 @@ export const DailyForecast = () => {
 											<Text color={styles.secondaryElement}>🌇 {day.astro.sunset}</Text>
 										</Box>
 										<Box marginTop={1}>
-											<Text color={styles.secondaryElement}>
+											<Text color={styles.secondaryElement} wrap="truncate">
 												<MoonPhaseIcon moonPhaseType={day.astro.moonPhase} />
 											</Text>
 										</Box>
