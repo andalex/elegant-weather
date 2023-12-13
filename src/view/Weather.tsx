@@ -55,6 +55,7 @@ export const Weather: React.FC<{}> = ({}) => {
 						<Box
 							width="15%"
 							borderStyle={styles.tertiaryBorderStyle}
+							borderColor={styles.tertiaryElement}
 							justifyContent="center"
 							paddingTop={0}
 							paddingLeft={1}
@@ -65,6 +66,7 @@ export const Weather: React.FC<{}> = ({}) => {
 						<Box
 							width="15%"
 							borderStyle={styles.tertiaryBorderStyle}
+							borderColor={styles.tertiaryElement}
 							justifyContent="center"
 							paddingTop={0}
 							paddingLeft={1}
@@ -77,6 +79,7 @@ export const Weather: React.FC<{}> = ({}) => {
 						<Box
 							width="15%"
 							borderStyle={styles.tertiaryBorderStyle}
+							borderColor={styles.tertiaryElement}
 							justifyContent="center"
 							paddingTop={0}
 							paddingLeft={1}
@@ -88,6 +91,7 @@ export const Weather: React.FC<{}> = ({}) => {
 						<Box
 							width="15%"
 							borderStyle={styles.tertiaryBorderStyle}
+							borderColor={styles.tertiaryElement}
 							justifyContent="center"
 							paddingTop={0}
 							paddingLeft={1}
@@ -107,6 +111,7 @@ export const Weather: React.FC<{}> = ({}) => {
 							width="15%"
 							alignItems="center"
 							borderStyle={styles.secondaryBorderStyle}
+							borderColor={styles.secondaryElement}
 							paddingTop={0}
 							flexDirection="column"
 						>
@@ -116,6 +121,7 @@ export const Weather: React.FC<{}> = ({}) => {
 							width="15%"
 							alignItems="center"
 							borderStyle={styles.secondaryBorderStyle}
+							borderColor={styles.secondaryElement}
 							paddingTop={0}
 							flexDirection="column"
 						>
@@ -129,6 +135,7 @@ export const Weather: React.FC<{}> = ({}) => {
 							width="15%"
 							alignItems="center"
 							borderStyle={styles.secondaryBorderStyle}
+							borderColor={styles.secondaryElement}
 							paddingTop={0}
 							flexDirection="column"
 						>
@@ -142,6 +149,7 @@ export const Weather: React.FC<{}> = ({}) => {
 							width="15%"
 							alignItems="center"
 							borderStyle={styles.secondaryBorderStyle}
+							borderColor={styles.secondaryElement}
 							paddingTop={0}
 							flexDirection="column"
 						>

@@ -78,7 +78,7 @@ export const AQI = (props: TAQIProps) => {
 					flexDirection="row"
 					width="auto"
 					justifyContent="center"
-					borderColor={styles.primaryElement}
+					borderColor={styles.secondaryElement}
 					borderStyle={styles.secondaryBorderStyle}
 				>
 					<Text color={styles.secondaryElement}>EPA Index: </Text>
@@ -88,13 +88,13 @@ export const AQI = (props: TAQIProps) => {
 			<Box flexDirection="row" width="100%" justifyContent="center">
 				<Text color={styles.primaryElement}>
 					PM10:{" "}
-					<Text backgroundColor={styles.secondaryAccent}>{props.aqi.pm10}</Text>{" "}
+					<Text bold backgroundColor={styles.secondaryAccent}>{" "}{props.aqi.pm10}{" "}</Text>{" "}
 					PM2.5:{" "}
-					<Text backgroundColor={styles.secondaryAccent}>{props.aqi.pm25}</Text>{" "}
+					<Text bold backgroundColor={styles.secondaryAccent}>{" "}{props.aqi.pm25}{" "}</Text>{" "}
 					Carbon Monoxide:{" "}
-					<Text backgroundColor={styles.secondaryAccent}>{props.aqi.co}</Text>{" "}
+					<Text bold backgroundColor={styles.secondaryAccent}>{" "}{props.aqi.co}{" "}</Text>{" "}
 					Ozone:{" "}
-					<Text backgroundColor={styles.secondaryAccent}>{props.aqi.o3}</Text>{" "}
+					<Text bold backgroundColor={styles.secondaryAccent}>{" "}{props.aqi.o3}{" "}</Text>{" "}
 					<Text bold color={styles.secondaryAccent}>
 						(μg/m3)
 					</Text>

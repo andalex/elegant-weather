@@ -41,6 +41,7 @@ export const DailyForecast = () => {
 							<Box flexDirection="column" height="100%" key={day.dayId}>
 								<Box
 									borderStyle={styles.tertiaryBorderStyle}
+									borderColor={styles.tertiaryElement}
 									justifyContent="center"
 									paddingTop={0}
 									paddingLeft={1}
@@ -54,6 +55,7 @@ export const DailyForecast = () => {
 								</Box>
 								<Box
 									borderStyle={styles.secondaryBorderStyle}
+									borderColor={styles.secondaryElement}
 									flexDirection="column"
 									paddingTop={0}
 									paddingLeft={1}
