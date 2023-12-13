@@ -46,7 +46,7 @@ export const PLAIN_JANE = {
     themeName: 'plainjane',
     styles: {
         primaryElement: '#fdf9f3',
-        secondaryElement: '#fdf9f3',
+        secondaryElement: 'gray',
         tertiaryElement: '#fdf9f3',
         primaryAccent: '#fdf9f3',
         secondaryAccent: '#fdf9f3',

@@ -12,6 +12,8 @@ export const Header = () => {
 		<BigText
 			text="Elegant Weather"
 			font={headerFont}
+			backgroundColor="white"
+			space={false}
 			colors={[styles.tertiaryElement, styles.secondaryElement, styles.primaryElement ]}
 		/>
 	);

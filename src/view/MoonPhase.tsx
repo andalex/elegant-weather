@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text } from 'ink';
+import { useTheme } from '../providers/ThemeProvider.js';
 
 
 enum MoonPhases {
@@ -37,8 +38,11 @@ type Props = {
     moonPhaseType: MoonPhases
 }
 
-export const MoonPhaseIcon = (props: Props) => {
+export const MoonPhase = (props: Props) => {
+    const { theme: { styles } } = useTheme();
   return (
-    <>{moonIcons[props.moonPhaseType].icon}{' '}{moonIcons[props.moonPhaseType].displayName}</>
+    <Text color={styles.secondaryElement} wrap="truncate-middle">
+        {moonIcons[props.moonPhaseType].icon}{' '}{moonIcons[props.moonPhaseType].displayName}
+    </Text>
   )
 }

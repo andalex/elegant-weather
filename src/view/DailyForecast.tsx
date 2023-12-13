@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Text, Spacer } from "ink";
-import { MoonPhaseIcon } from "./MoonPhaseIcon.js";
+import { MoonPhase } from "./MoonPhase.js";
 import Spinner from "ink-spinner";
 import { useForecast } from "../api/DataProviders/ForecastProvider.js";
 import { useWeatherOptions } from "../providers/WeatherOptionsProvider.js";
@@ -15,10 +15,16 @@ export const DailyForecast = () => {
 		apiData: { data, status },
 	} = useForecast();
 	const { forecastDays, tempScale } = useWeatherOptions();
-	const { theme: { styles } } = useTheme();
+	const {
+		theme: { styles },
+	} = useTheme();
 
 	return (
-		<Box flexDirection="column" width="100%" borderStyle={styles.secondaryBorderStyle}>
+		<Box
+			flexDirection="column"
+			width="100%"
+			borderStyle={styles.secondaryBorderStyle}
+		>
 			<Box justifyContent="center" padding={1}>
 				<Text bold color={styles.primaryElement}>
 					{forecastDays} Day Forecast
@@ -33,12 +39,12 @@ export const DailyForecast = () => {
 				<Box
 					width="100%"
 					justifyContent="center"
-					flexBasis="max-content"
+					flexDirection="row"
 					gap={1}
 				>
 					{data.forecastDay.map((day, index) => {
 						return (
-							<Box flexDirection="column" height="100%" key={day.dayId}>
+							<Box flexDirection="column" key={day.dayId}>
 								<Box
 									borderStyle={styles.tertiaryBorderStyle}
 									borderColor={styles.tertiaryElement}
@@ -47,7 +53,7 @@ export const DailyForecast = () => {
 									paddingLeft={1}
 									paddingRight={1}
 								>
-									<Text color={styles.tertiaryElement} wrap="truncate">
+									<Text color={styles.tertiaryElement} wrap="truncate-middle">
 										{index === 0
 											? `Today ${day.dayReadable.shortFormat}`
 											: `${day.dayReadable.dayName} ${day.dayReadable.shortFormat}`}
@@ -62,38 +68,48 @@ export const DailyForecast = () => {
 									paddingRight={1}
 								>
 									<Box justifyContent="center" padding={1}>
-										<Text bold color={styles.primaryElement}>
+										<Text wrap="truncate" bold color={styles.primaryElement}>
 											Forecast
 										</Text>
 									</Box>
 									<Box marginBottom={1} justifyContent="center">
-										<Text color={styles.primaryAccent}>{day.condition}</Text>
+										<Text wrap="truncate-middle" color={styles.primaryAccent}>{day.condition}</Text>
 									</Box>
 									<Box marginBottom={1} justifyContent="center">
-										<Text color={styles.secondaryElement}>
+										<Text wrap="truncate-middle" color={styles.secondaryElement}>
 											{tempScale === TempScale.Fahrenheit
 												? day.maxTempF + "°F"
 												: day.maxTempC + "°C"}
 											{" - "}
-										</Text>
-										<Text color={styles.secondaryElement}>
 											{tempScale === TempScale.Fahrenheit
 												? day.minTempF + "°F"
 												: day.minTempC + "°C"}
 										</Text>
 									</Box>
 									<Text>
-										<Text color={styles.secondaryElement}>{day.dailyWillItRain}</Text>
+										<Text color={styles.secondaryElement}>
+											{day.dailyWillItRain}
+										</Text>
 									</Text>
 									<Box marginBottom={1} justifyContent="center">
-										{day.dailyWillItRain && (
+										{day.dailyWillItRain ? (
 											<Text>
-												💧 <Text color={styles.secondaryElement}>{day.dailyChanceOfRain}%</Text>{' '}
+												💧{" "}
+												<Text color={styles.secondaryElement}>
+													{day.dailyChanceOfRain}%
+												</Text>{" "}
+											</Text>
+										) : (
+											<Text>
+												💧{" "}<Text color={styles.secondaryElement}>No</Text>{" "}
 											</Text>
 										)}
 										{day.dailyWillItSnow && (
 											<Text>
-												⛄️ <Text color={styles.secondaryElement}>{day.dailyChanceOfSnow}%</Text>
+												⛄️{" "}
+												<Text color={styles.secondaryElement}>
+													{day.dailyChanceOfSnow}%
+												</Text>
 											</Text>
 										)}
 									</Box>
@@ -104,18 +120,20 @@ export const DailyForecast = () => {
 										paddingRight={1}
 									>
 										<Box justifyContent="center" padding={1}>
-											<Text bold color={styles.primaryElement}>
+											<Text wrap="truncate" bold color={styles.primaryElement}>
 												Astro
 											</Text>
 										</Box>
-										<Text color={styles.secondaryElement}>🌅 {day.astro.sunrise}</Text>
+										<Text wrap="truncate-middle" color={styles.secondaryElement}>
+											🌅 {day.astro.sunrise}
+										</Text>
 										<Box marginTop={1}>
-											<Text color={styles.secondaryElement}>🌇 {day.astro.sunset}</Text>
+											<Text wrap="truncate-middle" color={styles.secondaryElement}>
+												🌇 {day.astro.sunset}
+											</Text>
 										</Box>
 										<Box marginTop={1}>
-											<Text color={styles.secondaryElement} wrap="truncate">
-												<MoonPhaseIcon moonPhaseType={day.astro.moonPhase} />
-											</Text>
+											<MoonPhase moonPhaseType={day.astro.moonPhase} />
 										</Box>
 									</Box>
 								</Box>

@@ -72,7 +72,9 @@ const TempScaleSelect = (props: TTempScaleSelectProps) => {
 				borderStyle={
 					isFocused ? styles.tertiaryBorderStyle : styles.secondaryBorderStyle
 				}
-				borderColor={isFocused ? styles.primaryElement : styles.secondaryAccent}
+				borderColor={
+					isFocused ? styles.secondaryElement : styles.secondaryAccent
+				}
 			>
 				<SelectInput
 					initialIndex={tempScale === TempScale.Fahrenheit ? 0 : 1}
@@ -153,7 +155,9 @@ const HeaderFontSelect = (props: TTempScaleSelectProps) => {
 				borderStyle={
 					isFocused ? styles.tertiaryBorderStyle : styles.secondaryBorderStyle
 				}
-				borderColor={isFocused ? styles.primaryElement : styles.secondaryAccent}
+				borderColor={
+					isFocused ? styles.secondaryElement : styles.secondaryAccent
+				}
 			>
 				<SelectInput
 					initialIndex={fontItems.findIndex(
@@ -200,11 +204,12 @@ const ForecastDaysInput = (props: TWeatherLocationProps) => {
 			<Box
 				flexDirection="column"
 				margin={0}
-				padding={0}
 				borderStyle={
 					isFocused ? styles.tertiaryBorderStyle : styles.secondaryBorderStyle
 				}
-				borderColor={isFocused ? styles.primaryElement : styles.secondaryAccent}
+				borderColor={
+					isFocused ? styles.secondaryElement : styles.secondaryAccent
+				}
 			>
 				<SelectInput
 					items={forecastDaysItems}
@@ -261,7 +266,9 @@ const ToggleWeatherOptions = (props: TToggleWeatherOptionsProps) => {
 				borderStyle={
 					isFocused ? styles.tertiaryBorderStyle : styles.secondaryBorderStyle
 				}
-				borderColor={isFocused ? styles.primaryElement : styles.secondaryAccent}
+				borderColor={
+					isFocused ? styles.secondaryElement : styles.secondaryAccent
+				}
 			>
 				<SelectInput
 					items={[
@@ -312,7 +319,9 @@ const SelectTheme = (props: TSelectThemeProps) => {
 				borderStyle={
 					isFocused ? styles.tertiaryBorderStyle : styles.secondaryBorderStyle
 				}
-				borderColor={isFocused ? styles.primaryElement : styles.secondaryAccent}
+				borderColor={
+					isFocused ? styles.secondaryElement : styles.secondaryAccent
+				}
 			>
 				<SelectInput
 					items={themeItems}
