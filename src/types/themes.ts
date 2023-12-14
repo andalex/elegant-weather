@@ -8,9 +8,18 @@ export enum TInkBorderStyles {
     classic = 'classic'
 }
 
+export enum ThemeNames {
+    Classic = 'classic',
+    Bloodmoon = 'bloodmoon',
+    Monokay = 'monokay',
+    Plainjane = 'plainjane',
+    Highcontrast = 'highcontrast',
+    Forest = 'forest'
+}
+
 // TODO add enum for supported colors
 export type TTheme = {
-    themeName: string,
+    themeName: ThemeNames,
     styles: {
         primaryElement: string,
         secondaryElement: string,
@@ -24,7 +33,7 @@ export type TTheme = {
 }
 
 export const CLASSIC_THEME = {
-    themeName: 'classic',
+    themeName: ThemeNames.Classic,
     styles: {
         primaryElement: 'greenBright',
         secondaryElement: 'green',
@@ -38,7 +47,7 @@ export const CLASSIC_THEME = {
 }
 
 export const BLOOD_MOON_THEME = {
-    themeName: 'bloodmoon',
+    themeName: ThemeNames.Bloodmoon,
     styles: {
         primaryElement: 'redBright',
         secondaryElement: 'red',
@@ -52,7 +61,7 @@ export const BLOOD_MOON_THEME = {
 }
 
 export const MONOKAY = {
-    themeName: 'monokay',
+    themeName: ThemeNames.Monokay,
     styles: {
         primaryElement: '#ab9df2',
         secondaryElement: '#fdf9f3',
@@ -66,7 +75,7 @@ export const MONOKAY = {
 }
 
 export const PLAIN_JANE = {
-    themeName: 'plainjane',
+    themeName: ThemeNames.Plainjane,
     styles: {
         primaryElement: '#fdf9f3',
         secondaryElement: 'gray',
@@ -80,7 +89,7 @@ export const PLAIN_JANE = {
 }
 
 export const HIGH_CONTRAST = {
-    themeName: 'highcontrast',
+    themeName: ThemeNames.Highcontrast,
     styles: {
         primaryElement: '#3a86ff',
         secondaryElement: '#fdf9f3',
@@ -94,7 +103,7 @@ export const HIGH_CONTRAST = {
 }
 
 export const FOREST = {
-    themeName: 'forest',
+    themeName: ThemeNames.Forest,
     styles: {
         primaryElement: '#9ef01a',
         secondaryElement: '#70e000',

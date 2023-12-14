@@ -27,7 +27,7 @@ export const DailyForecast = () => {
 		>
 			<Box justifyContent="center" padding={1}>
 				<Text bold color={styles.primaryElement}>
-					{forecastDays} Day Forecast
+					{status === API_STATUS.LOADING ? '' : `${forecastDays} Day Forecast`}
 				</Text>
 			</Box>
 			{/* ROW */}

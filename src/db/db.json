@@ -1,0 +1,17 @@
+{
+  "theme": {
+    "themeName": "forest",
+    "styles": {
+      "primaryElement": "#9ef01a",
+      "secondaryElement": "#70e000",
+      "tertiaryElement": "#38b000",
+      "primaryAccent": "#008000",
+      "secondaryAccent": "#ccff33",
+      "primaryBorderStyle": "classic",
+      "secondaryBorderStyle": "classic",
+      "tertiaryBorderStyle": "round"
+    }
+  },
+  "headerFont": "tiny",
+  "forecastDays": "5"
+}

@@ -3,8 +3,9 @@ import {
 	TempScale,
 	TWeatherOptionsContextState,
 	LOCATION_QUERY_DEFAULT,
-	HeaderFonts,
 } from "./types.js";
+import { HeaderFonts } from "../types/headerFonts.js";
+import { db } from "../db/index.js";
 
 
 //TODO split out into an updateProvider and and optionsProvider
@@ -14,9 +15,9 @@ const WeatherOptionsContext = createContext<TWeatherOptionsContextState>({
 	tempScale: TempScale.Fahrenheit,
 	setTempScale: (): void => {},
 	forecastDays: "3",
-	setForecastDays: (): void => {},
+	persistForecastDays: (): void => {},
 	headerFont: HeaderFonts.Chrome,
-	setHeaderFont: (): void => {},
+	persistHeaderFont: (): void => {},
 });
 
 export const useWeatherOptions = () => {
@@ -33,8 +34,20 @@ export const useWeatherOptions = () => {
 export function WeatherOptionsProvider({ children }) {
 	const [tempScale, setTempScale] = useState(TempScale.Fahrenheit);
 	const [locationQuery, setLocationQuery] = useState(LOCATION_QUERY_DEFAULT);
-	const [forecastDays, setForecastDays] = useState("3");
-	const [headerFont, setHeaderFont] = useState(HeaderFonts.Chrome);
+	const [forecastDays, setForecastDays] = useState(db.data.forecastDays);
+	const [headerFont, setHeaderFont] = useState(db.data.headerFont);
+
+	const persistForecastDays = (days: string) => {
+		db.data.forecastDays = days;
+		db.write();
+		setForecastDays(db.data.forecastDays);
+	}
+
+	const persistHeaderFont = (headerFont: HeaderFonts) => {
+		db.data.headerFont = headerFont;
+		db.write();
+		setHeaderFont(db.data.headerFont);
+	}
 
 	return (
 		<WeatherOptionsContext.Provider
@@ -44,9 +57,9 @@ export function WeatherOptionsProvider({ children }) {
 				locationQuery,
 				setLocationQuery,
 				forecastDays,
-				setForecastDays,
+				persistForecastDays,
 				headerFont,
-				setHeaderFont,
+				persistHeaderFont,
 			}}
 		>
 			{children}

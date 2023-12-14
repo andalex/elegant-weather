@@ -4,7 +4,8 @@ import SelectInput from "ink-select-input";
 import TextInput from "ink-text-input";
 // TODO add directory indexes to cleanup this imports
 import { useWeatherOptions } from "../providers/WeatherOptionsProvider.js";
-import { HeaderFonts, TempScale } from "../providers/types.js";
+import { TempScale } from "../providers/types.js";
+import { HeaderFonts } from "../types/headerFonts.js";
 import { useForecast } from "../api/DataProviders/ForecastProvider.js";
 import { useTheme, useThemeUpdate } from "../providers/ThemeProvider.js";
 
@@ -106,7 +107,7 @@ const TempScaleSelect = (props: TTempScaleSelectProps) => {
 };
 
 const HeaderFontSelect = (props: TTempScaleSelectProps) => {
-	const { headerFont, setHeaderFont } = useWeatherOptions();
+	const { headerFont, persistHeaderFont } = useWeatherOptions();
 	const { isFocused } = useFocus({ id: props.id });
 	const {
 		theme: { styles },
@@ -171,7 +172,7 @@ const HeaderFontSelect = (props: TTempScaleSelectProps) => {
 						)
 					}}
 					indicatorComponent={() =><Text color={isFocused ? styles.primaryElement : styles.primaryAccent}>{'> '}</Text>}
-					onSelect={(item) => setHeaderFont(item.value)}
+					onSelect={(item) => persistHeaderFont(item.value)}
 					isFocused={isFocused}
 					items={fontItems}
 					limit={1}
@@ -182,7 +183,7 @@ const HeaderFontSelect = (props: TTempScaleSelectProps) => {
 };
 
 const ForecastDaysInput = (props: TWeatherLocationProps) => {
-	const { forecastDays, setForecastDays } = useWeatherOptions();
+	const { forecastDays, persistForecastDays } = useWeatherOptions();
 	const { isFocused } = useFocus({ id: props.id });
 	const {
 		theme: { styles },
@@ -225,7 +226,7 @@ const ForecastDaysInput = (props: TWeatherLocationProps) => {
 					}}
 					indicatorComponent={() =><Text color={isFocused ? styles.primaryElement : styles.primaryAccent}>{'> '}</Text>}
 					limit={1}
-					onSelect={(item) => setForecastDays(item.value)}
+					onSelect={(item) => persistForecastDays(item.value)}
 					isFocused={isFocused}
 				/>
 			</Box>
@@ -303,7 +304,7 @@ const SelectTheme = (props: TSelectThemeProps) => {
 		theme: { styles, themeName },
 		themes,
 	} = useTheme();
-	const { setTheme } = useThemeUpdate();
+	const { persistTheme } = useThemeUpdate();
 	const themeItems = themes.map((theme) => {
 		return { label: theme.themeName, value: theme };
 	});
@@ -339,7 +340,7 @@ const SelectTheme = (props: TSelectThemeProps) => {
 					}}
 					indicatorComponent={() =><Text color={isFocused ? styles.primaryElement : styles.primaryAccent}>{'> '}</Text>}
 					limit={1}
-					onSelect={(item) => setTheme(item.value)}
+					onSelect={(item) => persistTheme(item.value)}
 					isFocused={isFocused}
 				/>
 			</Box>

@@ -1,14 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
+import { HeaderFonts } from "../types/headerFonts.js";
 
-export enum HeaderFonts {
-	Chrome = "chrome",
-	Grid = "grid",
-	Pallet = "pallet",
-	Shade = "shade",
-	Simple = "simple",
-	Slick = "slick",
-	Tiny = "tiny",
-}
 
 export type THeaderFontsState = Array<HeaderFonts>;
 
@@ -25,7 +17,7 @@ export type TWeatherOptionsContextState = {
 	locationQuery: string;
 	setLocationQuery: Dispatch<SetStateAction<string>>;
 	forecastDays: string;
-	setForecastDays: Dispatch<SetStateAction<string>>;
+	persistForecastDays: (days: string) => void;
 	headerFont: HeaderFonts;
-	setHeaderFont: Dispatch<SetStateAction<HeaderFonts>>;
+	persistHeaderFont: (headerFont: HeaderFonts) => void;
 };

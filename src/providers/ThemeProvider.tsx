@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useState, PropsWithChildren, Dispatch, SetStateAction } from 'react';
 import { CLASSIC_THEME, ELEGANT_WEATHER_THEMES } from '../types/themes.js';
-import { TTheme, TInkBorderStyles } from '../types/themes.js';
-
+import { TTheme } from '../types/themes.js';
+import { db } from "../db/index.js";
 
 
 type TThemeUpdateContextState = {
-    setTheme: Dispatch<SetStateAction<TTheme>>
+    persistTheme: (theme: TTheme) => void
 }
 
 type TThemeContextState = {
@@ -15,7 +15,7 @@ type TThemeContextState = {
 
 const ThemeContext = createContext<TThemeContextState>({ theme: CLASSIC_THEME, themes: ELEGANT_WEATHER_THEMES });
 
-const ThemeUpdateContext = createContext<TThemeUpdateContextState>({ setTheme: (): void => {} });
+const ThemeUpdateContext = createContext<TThemeUpdateContextState>({ persistTheme: (): void => {} });
 
 export const useTheme = () => {
     const contextState = useContext(ThemeContext);
@@ -42,11 +42,17 @@ export const useThemeUpdate = () => {
 }
 
 export const ThemeProvider = (props: PropsWithChildren) => {
-    const [theme, setTheme] = useState(CLASSIC_THEME);
+    const [theme, setTheme] = useState(db.data.theme);
+
+    const persistTheme = (theme: TTheme) => {
+      db.data.theme = theme;
+      db.write();
+      setTheme(db.data.theme);
+    }
 
     return (
         <ThemeContext.Provider value={{ theme, themes: ELEGANT_WEATHER_THEMES }}>
-            <ThemeUpdateContext.Provider value={{ setTheme }}>
+            <ThemeUpdateContext.Provider value={{ persistTheme }}>
                 {props.children}
             </ThemeUpdateContext.Provider>
         </ThemeContext.Provider>
