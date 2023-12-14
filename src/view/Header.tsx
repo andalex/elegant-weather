@@ -9,12 +9,14 @@ export const Header = () => {
 	const { theme: { styles }} = useTheme();
 
 	return (
-		<BigText
-			text="Elegant Weather"
-			font={headerFont}
-			backgroundColor="white"
-			space={false}
-			colors={[styles.tertiaryElement, styles.secondaryElement, styles.primaryElement ]}
-		/>
+		<Box width="100%" flexDirection="row" justifyContent="center">
+			<BigText
+				text="Elegant Weather"
+				font={headerFont}
+				backgroundColor="white"
+				space={false}
+				colors={[styles.tertiaryElement, styles.secondaryElement, styles.primaryElement ]}
+			/>
+		</Box>
 	);
 };

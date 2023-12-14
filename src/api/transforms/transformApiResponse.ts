@@ -60,7 +60,6 @@ const foreCastTransformer = (response: { [key: string]: any }) => {
 			}
 		),
 
-		//TODO: add transforms for hourly weather.
 		forecastHour: [],
 		location: {
 			country: data.location.country,

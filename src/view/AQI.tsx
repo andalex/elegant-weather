@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, Box } from "ink";
 import { useTheme } from "../providers/ThemeProvider.js";
+import { useForecast } from "../api/DataProviders/ForecastProvider.js";
 
 type TAQIIndexProps = {
 	index: number;
@@ -40,27 +41,13 @@ const AQIIndex = (props: TAQIIndexProps) => {
 	);
 };
 
-type TAQIProps = {
-	location: {
-		city: string;
-		region: string;
-	};
-	aqi: {
-		index: number;
-		pm25: number;
-		pm10: number;
-		co: number;
-		o3: number;
-		no2: number;
-		so2: number;
-	};
-};
-
-export const AQI = (props: TAQIProps) => {
+export const AQI = () => {
 	const {
 		theme: { styles },
 	} = useTheme();
-
+	const {
+		apiData: { data: { current: { aqi } } },
+	} = useForecast();
 	return (
 		<Box
 			flexDirection="column"
@@ -82,19 +69,19 @@ export const AQI = (props: TAQIProps) => {
 					borderStyle={styles.secondaryBorderStyle}
 				>
 					<Text color={styles.secondaryElement}>EPA Index: </Text>
-					<AQIIndex index={props.aqi.index} />
+					<AQIIndex index={aqi.index} />
 				</Box>
 			</Box>
 			<Box flexDirection="row" width="100%" justifyContent="center">
 				<Text color={styles.secondaryElement}>
 					PM10:{" "}
-					<Text bold backgroundColor={styles.secondaryAccent}>{" "}{props.aqi.pm10}{" "}</Text>{" "}
+					<Text bold backgroundColor={styles.secondaryAccent}>{" "}{aqi.pm10}{" "}</Text>{" "}
 					PM2.5:{" "}
-					<Text bold backgroundColor={styles.secondaryAccent}>{" "}{props.aqi.pm25}{" "}</Text>{" "}
+					<Text bold backgroundColor={styles.secondaryAccent}>{" "}{aqi.pm25}{" "}</Text>{" "}
 					Carbon Monoxide:{" "}
-					<Text bold backgroundColor={styles.secondaryAccent}>{" "}{props.aqi.co}{" "}</Text>{" "}
+					<Text bold backgroundColor={styles.secondaryAccent}>{" "}{aqi.co}{" "}</Text>{" "}
 					Ozone:{" "}
-					<Text bold backgroundColor={styles.secondaryAccent}>{" "}{props.aqi.o3}{" "}</Text>{" "}
+					<Text bold backgroundColor={styles.secondaryAccent}>{" "}{aqi.o3}{" "}</Text>{" "}
 					<Text bold color={styles.secondaryAccent}>
 						(μg/m3)
 					</Text>

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, PropsWithChildren, Dispatch, SetStateAction } from 'react';
-import { CLASSIC_THEME, ELEGANT_WEATHER_THEMES } from './themes.js';
-import { TTheme, TInkBorderStyles } from './types.js';
+import { CLASSIC_THEME, ELEGANT_WEATHER_THEMES } from '../types/themes.js';
+import { TTheme, TInkBorderStyles } from '../types/themes.js';
 
 
 

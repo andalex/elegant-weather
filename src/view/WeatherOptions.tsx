@@ -251,9 +251,10 @@ const ToggleWeatherOptions = (props: TToggleWeatherOptionsProps) => {
 	}, []);
 
 	return (
-		<Box flexDirection="column" width="15%">
+		<Box flexDirection="column" width="20%">
 			<Box justifyContent="center" padding={1}>
 				<Text
+					wrap="truncate"
 					color={isFocused ? styles.primaryElement : styles.secondaryAccent}
 				>
 					Show Options

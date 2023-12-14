@@ -14,7 +14,7 @@
 
 
 In Progress
-
+[ ] Swap current conditions UI over to RealTime API: https://www.weatherapi.com/docs/#apis-realtime
 
 Done
 [X] Add UI themeing

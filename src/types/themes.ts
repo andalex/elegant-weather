@@ -1,4 +1,27 @@
-import { TInkBorderStyles, TTheme } from "./types.js"
+export enum TInkBorderStyles {
+    single = 'single',
+    double = 'double',
+    round = 'round',
+    bold = 'bold',
+    singleDouble = 'singleDouble',
+    doubleSingle = 'doubleSingle',
+    classic = 'classic'
+}
+
+// TODO add enum for supported colors
+export type TTheme = {
+    themeName: string,
+    styles: {
+        primaryElement: string,
+        secondaryElement: string,
+        tertiaryElement: string,
+        primaryAccent: string,
+        secondaryAccent: string,
+        primaryBorderStyle: TInkBorderStyles,
+        secondaryBorderStyle: TInkBorderStyles,
+        tertiaryBorderStyle: TInkBorderStyles
+    }
+}
 
 export const CLASSIC_THEME = {
     themeName: 'classic',
