@@ -15,7 +15,7 @@ type TWeatherLocationProps = {
 
 const WeatherLocationInput = (props: TWeatherLocationProps) => {
 	const { getForecast } = useForecast();
-	const { locationQuery, setLocationQuery } = useWeatherOptions();
+	const { locationQuery, persistLocationQuery } = useWeatherOptions();
 	const { isFocused } = useFocus({ id: props.id });
 	const {
 		theme: { styles },
@@ -43,7 +43,7 @@ const WeatherLocationInput = (props: TWeatherLocationProps) => {
 					placeholder="Enter Location"
 					focus={isFocused}
 					onSubmit={(value) => getForecast({ q: value })}
-					onChange={(value) => setLocationQuery(value)}
+					onChange={(value) => persistLocationQuery(value)}
 				/>
 			</Box>
 		</Box>
@@ -55,7 +55,7 @@ type TTempScaleSelectProps = {
 };
 
 const TempScaleSelect = (props: TTempScaleSelectProps) => {
-	const { tempScale, setTempScale } = useWeatherOptions();
+	const { tempScale, persistTempScale } = useWeatherOptions();
 	const { isFocused } = useFocus({ id: props.id });
 	const {
 		theme: { styles },
@@ -79,7 +79,7 @@ const TempScaleSelect = (props: TTempScaleSelectProps) => {
 			>
 				<SelectInput
 					initialIndex={tempScale === TempScale.Fahrenheit ? 0 : 1}
-					onSelect={(item) => setTempScale(item.value)}
+					onSelect={(item) => persistTempScale(item.value)}
 					isFocused={isFocused}
 					limit={1}
 					itemComponent={props => {
@@ -243,9 +243,7 @@ type TToggleWeatherOptionsProps = {
 const ToggleWeatherOptions = (props: TToggleWeatherOptionsProps) => {
 	const { isFocused } = useFocus({ id: props.id });
 	const { focus } = useFocusManager();
-	const {
-		theme: { styles },
-	} = useTheme();
+	const { theme: { styles } } = useTheme();
 
 	useEffect(() => {
 		focus(props.id);
@@ -253,14 +251,6 @@ const ToggleWeatherOptions = (props: TToggleWeatherOptionsProps) => {
 
 	return (
 		<Box flexDirection="column" width="20%">
-			<Box justifyContent="center" padding={1}>
-				<Text
-					wrap="truncate"
-					color={isFocused ? styles.primaryElement : styles.secondaryAccent}
-				>
-					Show Options
-				</Text>
-			</Box>
 			<Box
 				flexDirection="column"
 				paddingLeft={1}
@@ -274,8 +264,8 @@ const ToggleWeatherOptions = (props: TToggleWeatherOptionsProps) => {
 			>
 				<SelectInput
 					items={[
-						{ label: "show", value: true },
-						{ label: "hide", value: false },
+						{ label: "show options", value: true },
+						{ label: "hide options", value: false },
 					]}
 					itemComponent={props => {
 						return (
@@ -290,6 +280,7 @@ const ToggleWeatherOptions = (props: TToggleWeatherOptionsProps) => {
 					isFocused={isFocused}
 				/>
 			</Box>
+
 		</Box>
 	);
 };
@@ -379,13 +370,13 @@ export const WeatherOptions = () => {
 							<HeaderFontSelect id="5" />
 							<SelectTheme id="6" />
 						</Box>
-						<Box justifyContent="center">
-							<Text bold color={styles.primaryElement}>
-								TAB: {"->"} / SHIFT+TAB: {"<-"} / ENTER to select
-							</Text>
-						</Box>
 					</>
 				)}
+			<Box justifyContent="center">
+				<Text bold color={styles.primaryElement}>
+					TAB: {"->"} / SHIFT+TAB: {"<-"} / ENTER to select
+				</Text>
+			</Box>
 			</Box>
 		</>
 	);

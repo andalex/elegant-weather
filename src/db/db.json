@@ -1,17 +1,22 @@
 {
+  "3": "3",
   "theme": {
-    "themeName": "forest",
+    "themeName": "bloodmoon",
     "styles": {
-      "primaryElement": "#9ef01a",
-      "secondaryElement": "#70e000",
-      "tertiaryElement": "#38b000",
-      "primaryAccent": "#008000",
-      "secondaryAccent": "#ccff33",
-      "primaryBorderStyle": "classic",
+      "primaryElement": "redBright",
+      "secondaryElement": "red",
+      "tertiaryElement": "redBright",
+      "primaryAccent": "gray",
+      "secondaryAccent": "white",
+      "primaryBorderStyle": "singleDouble",
       "secondaryBorderStyle": "classic",
-      "tertiaryBorderStyle": "round"
+      "tertiaryBorderStyle": "single"
     }
   },
-  "headerFont": "tiny",
-  "forecastDays": "5"
+  "headerFont": "chrome",
+  "forecastDays": "5",
+  "locationQuery": "India",
+  "celsius": "celsius",
+  "tiny": "tiny",
+  "slick": "slick"
 }

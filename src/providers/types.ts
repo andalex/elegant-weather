@@ -9,13 +9,11 @@ export enum TempScale {
 	Celsius = "celsius",
 }
 
-export const LOCATION_QUERY_DEFAULT = "Portland, OR";
-
 export type TWeatherOptionsContextState = {
 	tempScale: TempScale.Fahrenheit | TempScale.Celsius;
-	setTempScale: Dispatch<SetStateAction<TempScale>>;
+	persistTempScale: (tempScale: TempScale) => void;
 	locationQuery: string;
-	setLocationQuery: Dispatch<SetStateAction<string>>;
+	persistLocationQuery: (locationQuery: string) => void;
 	forecastDays: string;
 	persistForecastDays: (days: string) => void;
 	headerFont: HeaderFonts;

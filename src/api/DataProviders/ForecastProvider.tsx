@@ -4,8 +4,7 @@ import { API_STATUS, API_METHODS, TQuery } from "../types.js";
 import { createDataHook } from "./CreateDataHook.js";
 import { handleApiRequeset } from "../handleApiRequest.js";
 import { useWeatherOptions } from "../../providers/WeatherOptionsProvider.js";
-
-const DEFAULT_CITY = "Portland, OR";
+import { db } from "../../db/index.js";
 
 const ForecastContext = createContext<TDataContextState | null>(null);
 
@@ -29,7 +28,7 @@ export const ForecastProvider = (props: PropsWithChildren ) => {
   // Fetch initial data
   useEffect(() => {
     (async (): Promise<void> => {
-      await getForecast({ q: DEFAULT_CITY })
+      await getForecast({ q: db.data.locationQuery })
     })();
   }, []);
 

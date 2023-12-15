@@ -1,19 +1,20 @@
-import React, { useContext, useState, createContext } from "react";
-import {
-	TempScale,
-	TWeatherOptionsContextState,
-	LOCATION_QUERY_DEFAULT,
-} from "./types.js";
+import React, {
+	useContext,
+	useState,
+	createContext,
+	SetStateAction,
+	Dispatch,
+} from "react";
+import { TempScale, TWeatherOptionsContextState } from "./types.js";
 import { HeaderFonts } from "../types/headerFonts.js";
 import { db } from "../db/index.js";
 
-
 //TODO split out into an updateProvider and and optionsProvider
 const WeatherOptionsContext = createContext<TWeatherOptionsContextState>({
-	locationQuery: LOCATION_QUERY_DEFAULT,
-	setLocationQuery: (): void => {},
+	locationQuery: db.data.locationQuery,
+	persistLocationQuery: (): void => {},
 	tempScale: TempScale.Fahrenheit,
-	setTempScale: (): void => {},
+	persistTempScale: (): void => {},
 	forecastDays: "3",
 	persistForecastDays: (): void => {},
 	headerFont: HeaderFonts.Chrome,
@@ -32,30 +33,44 @@ export const useWeatherOptions = () => {
 };
 
 export function WeatherOptionsProvider({ children }) {
-	const [tempScale, setTempScale] = useState(TempScale.Fahrenheit);
-	const [locationQuery, setLocationQuery] = useState(LOCATION_QUERY_DEFAULT);
-	const [forecastDays, setForecastDays] = useState(db.data.forecastDays);
-	const [headerFont, setHeaderFont] = useState(db.data.headerFont);
+	const { data } = db;
+	const [tempScale, setTempScale] = useState(data.tempScale);
+	const [locationQuery, setLocationQuery] = useState(data.locationQuery);
+	const [forecastDays, setForecastDays] = useState(data.forecastDays);
+	const [headerFont, setHeaderFont] = useState(data.headerFont);
+
+
+	const persistTempScale = (tempScale: TempScale) => {
+		db.data.tempScale = tempScale;
+		db.write();
+		setTempScale(db.data.tempScale)
+	};
+
+	const persistLocationQuery = (locationQuery: string) => {
+		db.data.locationQuery = locationQuery;
+		db.write();
+		setLocationQuery(db.data.locationQuery);
+	};
 
 	const persistForecastDays = (days: string) => {
 		db.data.forecastDays = days;
 		db.write();
 		setForecastDays(db.data.forecastDays);
-	}
+	};
 
 	const persistHeaderFont = (headerFont: HeaderFonts) => {
 		db.data.headerFont = headerFont;
 		db.write();
 		setHeaderFont(db.data.headerFont);
-	}
+	};
 
 	return (
 		<WeatherOptionsContext.Provider
 			value={{
 				tempScale,
-				setTempScale,
+				persistTempScale,
 				locationQuery,
-				setLocationQuery,
+				persistLocationQuery,
 				forecastDays,
 				persistForecastDays,
 				headerFont,
