@@ -11,6 +11,7 @@ import { useTheme } from "../providers/ThemeProvider.js";
 import { CurrentConditions } from "./CurrentConditions.js";
 import { ErrorBoundary } from "./ErrorBoundary.js";
 import { ForecastErrorFallback } from './ForecastErrorFallback.js';
+import DayForecast from "./DayForecast.js";
 
 
 export const Weather: React.FC<{}> = ({}) => {
@@ -37,6 +38,7 @@ export const Weather: React.FC<{}> = ({}) => {
 					<ErrorBoundary fallbackComponent={<ForecastErrorFallback />}>
 						<CurrentConditions />
 						<DailyForecast />
+						<DayForecast />
 						<AQI />
 					</ErrorBoundary>
 					<WeatherOptions />

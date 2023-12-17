@@ -3,6 +3,7 @@ import { ForecastProvider } from "../api/DataProviders/ForecastProvider.js";
 import { WeatherOptionsProvider } from "../providers/WeatherOptionsProvider.js";
 import { ThemeProvider } from "../providers/ThemeProvider.js";
 import { Weather } from "./Weather.js";
+import { SelectedDayProvider } from "../providers/SelectedDayProvider.js";
 
 
 export const App = () => {
@@ -10,7 +11,9 @@ export const App = () => {
 		<WeatherOptionsProvider>
 			<ForecastProvider>
 				<ThemeProvider>
-					<Weather />
+					<SelectedDayProvider>
+						<Weather />
+					</SelectedDayProvider>
 				</ThemeProvider>
 			</ForecastProvider>
 		</WeatherOptionsProvider>

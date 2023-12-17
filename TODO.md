@@ -27,6 +27,7 @@
 
 
 In Progress
+[ ] Add prettier/linter/make sure running
 [ ] Sensible error-boundaries
 [ ] Persist location
 [ ] Persist Temp Scale

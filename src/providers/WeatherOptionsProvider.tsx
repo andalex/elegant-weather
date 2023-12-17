@@ -2,8 +2,6 @@ import React, {
 	useContext,
 	useState,
 	createContext,
-	SetStateAction,
-	Dispatch,
 } from "react";
 import { TempScale, TWeatherOptionsContextState } from "./types.js";
 import { HeaderFonts } from "../types/headerFonts.js";

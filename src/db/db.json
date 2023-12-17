@@ -1,19 +1,19 @@
 {
   "theme": {
-    "themeName": "plainjane",
+    "themeName": "bloodmoon",
     "styles": {
-      "primaryElement": "#fdf9f3",
-      "secondaryElement": "gray",
-      "tertiaryElement": "#fdf9f3",
-      "primaryAccent": "#fdf9f3",
-      "secondaryAccent": "#fdf9f3",
-      "primaryBorderStyle": "classic",
-      "secondaryBorderStyle": "round",
+      "primaryElement": "redBright",
+      "secondaryElement": "red",
+      "tertiaryElement": "redBright",
+      "primaryAccent": "gray",
+      "secondaryAccent": "white",
+      "primaryBorderStyle": "singleDouble",
+      "secondaryBorderStyle": "classic",
       "tertiaryBorderStyle": "single"
     }
   },
-  "headerFont": "chrome",
-  "forecastDays": "4",
+  "headerFont": "grid",
+  "forecastDays": "5",
   "locationQuery": "Warren, Or",
   "tempScale": "celsius"
 }

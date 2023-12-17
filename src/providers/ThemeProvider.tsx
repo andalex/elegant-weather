@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, PropsWithChildren, Dispatch, SetStateAction } from 'react';
+import React, { createContext, useContext, useState, PropsWithChildren } from 'react';
 import { CLASSIC_THEME, ELEGANT_WEATHER_THEMES } from '../types/themes.js';
 import { TTheme } from '../types/themes.js';
 import { db } from "../db/index.js";

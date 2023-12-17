@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Text, useFocus } from "ink";
 import { MoonPhase } from "./MoonPhase.js";
 import Spinner from "ink-spinner";
@@ -8,25 +8,37 @@ import { TempScale } from "../providers/types.js";
 import { API_STATUS } from "../api/types.js";
 import { useTheme } from "../providers/ThemeProvider.js";
 import { TforecastDay } from "../api/transforms/types.js";
+import { useSelectedDay } from "../providers/SelectedDayProvider.js";
 
 
 type TForecastDayProps = {
 	day: TforecastDay;
 	index: number;
+	id: string
 };
 
 export const ForecastDay = (props: TForecastDayProps) => {
-	const { day, index } = props;
+	const { day, id, index } = props;
 	const {
 		theme: { styles },
 	} = useTheme();
 	const { tempScale } = useWeatherOptions();
+	const { isFocused } = useFocus({ id });
+	const { setSelectedDay } = useSelectedDay();
+
+	useEffect(() => {
+		setSelectedDay(day.dayId);
+	}, [isFocused])
 
 	return (
 		<Box flexDirection="column">
 			<Box
-				borderStyle={styles.tertiaryBorderStyle}
-				borderColor={styles.tertiaryElement}
+				borderStyle={
+					isFocused ? styles.tertiaryBorderStyle : styles.secondaryBorderStyle
+				}
+				borderColor={
+					isFocused ? styles.secondaryElement : styles.secondaryAccent
+				}
 				justifyContent="center"
 				paddingTop={0}
 				paddingLeft={1}
@@ -148,7 +160,7 @@ export const DailyForecast = () => {
 			) : (
 				<Box width="100%" justifyContent="center" flexDirection="row" gap={1}>
 					{data.forecastDay.map((day, index) => {
-						return <ForecastDay day={day} index={index} key={day.dayId}/>;
+						return <ForecastDay day={day} id={day.dayId} index={index} key={day.dayId}/>;
 					})}
 				</Box>
 			)}
