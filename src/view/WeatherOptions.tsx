@@ -20,6 +20,11 @@ const WeatherLocationInput = (props: TWeatherLocationProps) => {
 	const {
 		theme: { styles },
 	} = useTheme();
+	const { focus } = useFocusManager();
+
+	useEffect(() => {
+		focus(props.id);
+	}, [])
 
 	return (
 		<Box flexDirection="column" margin={1}>
@@ -276,7 +281,7 @@ const ToggleWeatherOptions = (props: TToggleWeatherOptionsProps) => {
 					}}
 					indicatorComponent={() =><Text color={isFocused ? styles.primaryElement : styles.primaryAccent}>{'> '}</Text>}
 					limit={1}
-					onSelect={(item) => props.setIsOpen(item.value)}
+					onSelect={({ value }) => props.setIsOpen(value)}
 					isFocused={isFocused}
 				/>
 			</Box>

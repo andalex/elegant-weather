@@ -1,18 +1,8 @@
 import React from 'react'
 import { Text } from 'ink';
 import { useTheme } from '../providers/ThemeProvider.js';
+import { MoonPhases } from '../types/moonPhase.js';
 
-
-enum MoonPhases {
-    NewMoon = "newMoon",
-    WaxingCrescent = "waxingCrescent",
-    FirstQuarter = "firstQuarter",
-    WaxingGibbous = "waxingGibbous",
-    FullMoon = "fullMoon",
-    WaningGibbous = "waningGibbous",
-    LastQuarter = "lastQuarter",
-    WaningCrescent = "waningCrescent"
-}
 
 type TMoonPhases = {
     [MoonPhase in MoonPhases]: {
