@@ -27,7 +27,7 @@ export const ForecastDay = (props: TForecastDayProps) => {
 	const { setSelectedDay } = useSelectedDay();
 
 	useEffect(() => {
-		setSelectedDay(day.dayId);
+		setSelectedDay(day);
 	}, [isFocused])
 
 	return (
@@ -146,6 +146,8 @@ export const DailyForecast = () => {
 			flexDirection="column"
 			width="100%"
 			borderStyle={styles.secondaryBorderStyle}
+			paddingLeft={2}
+			paddingRight={2}
 		>
 			<Box justifyContent="center" padding={1}>
 				<Text bold color={styles.primaryElement}>

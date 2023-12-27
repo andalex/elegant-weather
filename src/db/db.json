@@ -12,8 +12,8 @@
       "tertiaryBorderStyle": "single"
     }
   },
-  "headerFont": "grid",
+  "headerFont": "tiny",
   "forecastDays": "5",
-  "locationQuery": "Warren, Or",
-  "tempScale": "celsius"
+  "locationQuery": "Warren, OR",
+  "tempScale": "fahrenheit"
 }

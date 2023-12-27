@@ -4,10 +4,59 @@ import { toCamelCase } from "./utils/toCamelCase.js";
 import { getDayReadable } from "./utils/getDayReadable.js";
 import { convertChanceToBoolean } from "./utils/convertChanceToBoolean.js";
 
-// AA Notes
-// This file serves as the main transform from the raw API data, which is very dense and detailed.
-// As I add new features to the UI, this transform will expand and require better patterns to better use the rich and detailed weather data provided.
-const foreCastTransformer = (response: { [key: string]: any }) => {
+const getTimeReadable = (time: string, timeZone) => {
+	const readableTime = new Date(time).toLocaleString("en-US", {
+		hour: "2-digit",
+		minute: "2-digit",
+		hour12: false,
+		timeZone
+	})
+	const hour = new Date(time).toLocaleString("en-US", {
+		hour: "numeric",
+		hour12: false,
+		timeZone
+	}).split(' ').join('');
+
+	const now = new Date().toLocaleString("en-US", {
+		hour: "numeric",
+		hour12: false,
+		timeZone
+	}).split(' ').join('');
+
+	return { readableTime, hour: Number(hour), now }
+}
+
+const forecastHoursTransformer = (foreCastHour, tz_id: string) => {
+	const forecastHours = foreCastHour.map(hour => {
+		return {
+			timeEpoc: hour.time_epoch,
+			time: getTimeReadable(hour.time, tz_id),
+			tempC: hour.temp_c,
+			tempF: hour.temp_f,
+			condition: hour.condition.text,
+			conditionType: toCamelCase(hour.condition.text),
+			windMPH: hour.wind_mph,
+			windDir: hour.wind_dir,
+			feelsLikeC: hour.feelslike_c,
+			feelsLikeF: hour.feelslike_f,
+			chanceOfRain: hour.chance_of_rain,
+			chanceOfSnow: hour.chance_of_snow,
+			willItRain: convertChanceToBoolean(hour.will_it_rain),
+			willItSnow: convertChanceToBoolean(hour.will_it_snow),
+		};
+	});
+
+	/**
+	 * WeatherAPI returns hour 24 first in the list which asthetically looks odd when rendering hourly forecasts in order.
+	 * Put the first element in the hours array last.
+	 */
+	forecastHours.push(forecastHours.shift());
+
+	return forecastHours;
+}
+
+//TODO memoize this
+const forecastTransformer = (response: { [key: string]: any }) => {
 	const { data } = response;
 
 	return {
@@ -31,6 +80,7 @@ const foreCastTransformer = (response: { [key: string]: any }) => {
 		},
 		forecastDay: data.forecast.forecastday.map(
 			(forecast: { [key: string]: any }) => {
+				console.log(forecastHoursTransformer(forecast.hour, data.location.tz_id))
 				return {
 					dayId: uuidv4(),
 					dayReadable: getDayReadable(forecast.date),
@@ -56,11 +106,10 @@ const foreCastTransformer = (response: { [key: string]: any }) => {
 						sunset: forecast.astro.sunset,
 						moonPhase: toCamelCase(forecast.astro.moon_phase),
 					},
+					hours: forecastHoursTransformer(forecast.hour, data.location.tz_id)
 				};
 			}
 		),
-
-		forecastHour: [],
 		location: {
 			country: data.location.country,
 			city: data.location.name,
@@ -73,7 +122,7 @@ const foreCastTransformer = (response: { [key: string]: any }) => {
 export const transformApiResponse = (response: {}, apiMethod: API_METHODS) => {
 	switch (apiMethod) {
 		case API_METHODS.getForecast:
-			return foreCastTransformer(response);
+			return forecastTransformer(response);
 		default:
 			return new Error("Please include a value from enum API_METHOD");
 	}

@@ -1,6 +1,27 @@
 import { Days } from "../../types/days.js";
 import { MoonPhases } from "../../types/moonPhase.js";
 
+export type THourForecast = {
+	timeEpoc: string
+	time: {
+		readableTime: string,
+		hour: number,
+		now: number
+	}
+	tempC: string,
+	tempF: string,
+	condition: string,
+	conditionType: string,
+	windMPH: string,
+	windDir: string,
+	feelsLikeC: string,
+	feelsLikeF: string,
+	chanceOfRain: number,
+	chanceOfSnow: number,
+	willItRain: boolean,
+	willItSnow: boolean,
+}
+
 export type TforecastDay = {
 	dayId: string;
 	dayReadable: {
@@ -25,4 +46,5 @@ export type TforecastDay = {
 		sunset: string;
 		moonPhase: MoonPhases;
 	};
+	hours: Array<THourForecast>
 };

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, PropsWithChildren } from 'react';
-import { CLASSIC_THEME, ELEGANT_WEATHER_THEMES } from '../types/themes.js';
+import { BLOOD_MOON_THEME, ELEGANT_WEATHER_THEMES } from '../types/themes.js';
 import { TTheme } from '../types/themes.js';
 import { db } from "../db/index.js";
 
@@ -13,7 +13,7 @@ type TThemeContextState = {
     themes: Array<TTheme>
 }
 
-const ThemeContext = createContext<TThemeContextState>({ theme: CLASSIC_THEME, themes: ELEGANT_WEATHER_THEMES });
+const ThemeContext = createContext<TThemeContextState>({ theme: BLOOD_MOON_THEME, themes: ELEGANT_WEATHER_THEMES });
 
 const ThemeUpdateContext = createContext<TThemeUpdateContextState>({ persistTheme: (): void => {} });
 

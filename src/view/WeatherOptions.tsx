@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
-import { Box, Text, useFocus, useInput, useFocusManager } from "ink";
+import { Box, Text, useFocus, useFocusManager, Spacer } from "ink";
 import SelectInput from "ink-select-input";
 import TextInput from "ink-text-input";
 // TODO add directory indexes to cleanup this imports
@@ -274,7 +274,7 @@ const ToggleWeatherOptions = (props: TToggleWeatherOptionsProps) => {
 					]}
 					itemComponent={props => {
 						return (
-							<Text color={isFocused ? styles.primaryElement : styles.secondaryAccent}>
+							<Text wrap="truncate-middle" color={isFocused ? styles.primaryElement : styles.secondaryAccent}>
 								{props.label}
 							</Text>
 						)
@@ -377,7 +377,7 @@ export const WeatherOptions = () => {
 						</Box>
 					</>
 				)}
-			<Box justifyContent="center">
+			<Box alignItems="center" flexDirection="column" width="100%" padding={2}>
 				<Text bold color={styles.primaryElement}>
 					TAB: {"->"} / SHIFT+TAB: {"<-"} / ENTER to select
 				</Text>
