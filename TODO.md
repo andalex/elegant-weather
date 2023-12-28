@@ -16,10 +16,7 @@
     - Condensed/widget, small, full, extended.
     - Use the hook for the terminal window resize provided from ink.
 
-2 [ ] Add weather alerts section (NOAA alerts);
-
 1 [ ] Add tests
-
 
 1 [ ] Roadmap MVP Features, and post MVP features.
 
@@ -28,10 +25,12 @@
 
 In Progress
 [ ] Add prettier/linter/make sure running
-[ ] Sensible error-boundaries
-[ ] Persist location
-[ ] Persist Temp Scale
-[ ] Add more drops emoj for more rain
+[ ] Add weather alerts section (NOAA alerts);
+[ ] Add selected day (tabbing through forecast to select) to DB persistance.
+[x] Sensible error-boundaries
+[x] Persist location
+[x] Persist Temp Scale
+[x] Add more drops emoj for more rain
 
 Non-MVP
 [ ] Swap current conditions UI over to RealTime API: https://www.weatherapi.com/docs/#apis-realtime (see if it matters using this API)

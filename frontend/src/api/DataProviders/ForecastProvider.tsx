@@ -5,6 +5,7 @@ import { createDataHook } from "./CreateDataHook.js";
 import { handleApiRequeset } from "../handleApiRequest.js";
 import { useWeatherOptions } from "../../providers/WeatherOptionsProvider.js";
 import { db } from "../../db/index.js";
+import { useRefreshResults } from "../../providers/RefreshResultsProvider.js";
 
 const ForecastContext = createContext<TDataContextState | null>(null);
 
@@ -16,6 +17,7 @@ export const ForecastProvider = (props: PropsWithChildren ) => {
     data: null,
   });
   const { forecastDays, locationQuery } = useWeatherOptions();
+  const { refreshResults } = useRefreshResults();
 
   const getForecast = async (query: TQuery) => {
     await handleApiRequeset(
@@ -31,6 +33,12 @@ export const ForecastProvider = (props: PropsWithChildren ) => {
       await getForecast({ q: db.data.locationQuery })
     })();
   }, []);
+
+  // useEffect(() => {
+  //   (async (): Promise<void> => {
+  //     await getForecast({ q: db.data.locationQuery })
+  //   })();
+  // }, [refreshResults]);
 
   //TODO see if you can conviently combine these two side effects
   useEffect(() => {

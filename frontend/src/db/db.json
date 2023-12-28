@@ -1,0 +1,19 @@
+{
+  "theme": {
+    "themeName": "highcontrast",
+    "styles": {
+      "primaryElement": "#3a86ff",
+      "secondaryElement": "#fdf9f3",
+      "tertiaryElement": "#fb5607",
+      "primaryAccent": "#ff006e",
+      "secondaryAccent": "#8338ec",
+      "primaryBorderStyle": "classic",
+      "secondaryBorderStyle": "round",
+      "tertiaryBorderStyle": "bold"
+    }
+  },
+  "headerFont": "tiny",
+  "forecastDays": "5",
+  "locationQuery": "Warren, OR",
+  "tempScale": "fahrenheit"
+}

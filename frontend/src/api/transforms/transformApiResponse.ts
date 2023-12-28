@@ -6,9 +6,8 @@ import { convertChanceToBoolean } from "./utils/convertChanceToBoolean.js";
 
 const getTimeReadable = (time: string, timeZone) => {
 	const readableTime = new Date(time).toLocaleString("en-US", {
-		hour: "2-digit",
-		minute: "2-digit",
-		hour12: false,
+		hour: "numeric",
+		hour12: true,
 		timeZone
 	})
 	const hour = new Date(time).toLocaleString("en-US", {
@@ -80,7 +79,6 @@ const forecastTransformer = (response: { [key: string]: any }) => {
 		},
 		forecastDay: data.forecast.forecastday.map(
 			(forecast: { [key: string]: any }) => {
-				console.log(forecastHoursTransformer(forecast.hour, data.location.tz_id))
 				return {
 					dayId: uuidv4(),
 					dayReadable: getDayReadable(forecast.date),

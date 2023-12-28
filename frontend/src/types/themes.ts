@@ -42,21 +42,21 @@ export const CLASSIC_THEME = {
         secondaryAccent: 'gray',
         primaryBorderStyle: TInkBorderStyles.classic,
         secondaryBorderStyle: TInkBorderStyles.round,
-        tertiaryBorderStyle: TInkBorderStyles.single
+        tertiaryBorderStyle: TInkBorderStyles.bold
     }
 }
 
 export const BLOOD_MOON_THEME = {
     themeName: ThemeNames.Bloodmoon,
     styles: {
-        primaryElement: 'redBright',
-        secondaryElement: 'red',
-        tertiaryElement: 'redBright',
-        primaryAccent: 'gray',
-        secondaryAccent: 'white',
+        primaryElement: '#ca0101',
+        secondaryElement: '#e30613',
+        tertiaryElement: '#e0dcdc',
+        primaryAccent: '#fffbfb',
+        secondaryAccent: '#c2242d',
         primaryBorderStyle: TInkBorderStyles.singleDouble,
-        secondaryBorderStyle: TInkBorderStyles.classic,
-        tertiaryBorderStyle: TInkBorderStyles.single
+        secondaryBorderStyle: TInkBorderStyles.round,
+        tertiaryBorderStyle: TInkBorderStyles.bold
     }
 }
 
@@ -70,7 +70,7 @@ export const MONOKAY = {
         secondaryAccent: '#ff6188',
         primaryBorderStyle: TInkBorderStyles.classic,
         secondaryBorderStyle: TInkBorderStyles.round,
-        tertiaryBorderStyle: TInkBorderStyles.singleDouble
+        tertiaryBorderStyle: TInkBorderStyles.bold
     }
 }
 
@@ -84,7 +84,7 @@ export const PLAIN_JANE = {
         secondaryAccent: '#fdf9f3',
         primaryBorderStyle: TInkBorderStyles.classic,
         secondaryBorderStyle: TInkBorderStyles.round,
-        tertiaryBorderStyle: TInkBorderStyles.single
+        tertiaryBorderStyle: TInkBorderStyles.bold
     }
 }
 
@@ -97,8 +97,8 @@ export const HIGH_CONTRAST = {
         primaryAccent: '#ff006e',
         secondaryAccent: '#8338ec',
         primaryBorderStyle: TInkBorderStyles.classic,
-        secondaryBorderStyle: TInkBorderStyles.single,
-        tertiaryBorderStyle: TInkBorderStyles.round
+        secondaryBorderStyle: TInkBorderStyles.round,
+        tertiaryBorderStyle: TInkBorderStyles.bold
     }
 }
 
@@ -111,8 +111,8 @@ export const FOREST = {
         primaryAccent: '#008000',
         secondaryAccent: '#ccff33',
         primaryBorderStyle: TInkBorderStyles.classic,
-        secondaryBorderStyle: TInkBorderStyles.classic,
-        tertiaryBorderStyle: TInkBorderStyles.round
+        secondaryBorderStyle: TInkBorderStyles.singleDouble,
+        tertiaryBorderStyle: TInkBorderStyles.bold
     }
 }
 
