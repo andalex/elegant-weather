@@ -2,6 +2,9 @@
 1 [ ] Work on NPM and publishing stuff
 
 1 [ ] Infra for storing API secret (AWS Secrets manager w Lambda ?)
+    - https://aws.amazon.com/blogs/compute/securely-retrieving-secrets-with-aws-lambda/
+    - https://www.serverless.com/blog/aws-secrets-management/
+    
 
 1 [ ] Componetize better -- break apart common layout components, and better organize the app structure. Consider common props perhaps? since Ink is so declarative
     - Do this in phases -- first phase, as organizational and little code change as possible, i.e. if you can just break something out to a file do that.
@@ -27,6 +30,7 @@ In Progress
 [ ] Add prettier/linter/make sure running
 [ ] Add weather alerts section (NOAA alerts);
 [ ] Add selected day (tabbing through forecast to select) to DB persistance.
+[ ] Add snow support
 [x] Sensible error-boundaries
 [x] Persist location
 [x] Persist Temp Scale

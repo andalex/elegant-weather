@@ -76,7 +76,12 @@ const HourWeatherElement = (props: THourWeatherElementProps) => {
 			</Box>
 			<Box flexDirection="row" justifyContent="center">
 				<Text wrap="truncate-middle" {...computeTextStyles(time.now, time.hour)}>
-					{condition}{willItRain ? ` - 💧 ${chanceOfRain}%` : ''}
+					{condition}
+				</Text>
+			</Box>
+			<Box flexDirection="row" justifyContent="center">
+				<Text wrap="truncate-middle" {...computeTextStyles(time.now, time.hour)}>
+					{willItRain ? `💧 ${chanceOfRain}%` : ''}
 				</Text>
 			</Box>
 		</Box>

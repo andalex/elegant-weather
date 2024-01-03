@@ -1,12 +1,12 @@
 {
   "theme": {
-    "themeName": "highcontrast",
+    "themeName": "plainjane",
     "styles": {
-      "primaryElement": "#3a86ff",
-      "secondaryElement": "#fdf9f3",
-      "tertiaryElement": "#fb5607",
-      "primaryAccent": "#ff006e",
-      "secondaryAccent": "#8338ec",
+      "primaryElement": "#fdf9f3",
+      "secondaryElement": "gray",
+      "tertiaryElement": "#fdf9f3",
+      "primaryAccent": "#fdf9f3",
+      "secondaryAccent": "#fdf9f3",
       "primaryBorderStyle": "classic",
       "secondaryBorderStyle": "round",
       "tertiaryBorderStyle": "bold"

@@ -12,6 +12,7 @@ import { CurrentConditions } from "./CurrentConditions.js";
 import { ErrorBoundary } from "./ErrorBoundary.js";
 import { ForecastErrorFallback } from './ForecastErrorFallback.js';
 import { DayForecast } from "./DayForecast.js";
+import { useResponsiveLayout } from "../providers/ResponsiveLayoutProvider.js";
 
 
 export const Weather: React.FC<{}> = ({}) => {
@@ -19,6 +20,7 @@ export const Weather: React.FC<{}> = ({}) => {
 		apiData: { status },
 	} = useForecast();
 	const { theme: { styles } } = useTheme();
+	const { layoutType } = useResponsiveLayout();
 
 	return (
 		<Box
@@ -36,6 +38,7 @@ export const Weather: React.FC<{}> = ({}) => {
 			) : (
 				<>
 					<ErrorBoundary fallbackComponent={<ForecastErrorFallback />}>
+						<Text>LayoutType: {layoutType}</Text>
 						<CurrentConditions />
 						<DailyForecast />
 						<DayForecast />

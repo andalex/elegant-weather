@@ -5,6 +5,7 @@ import { ThemeProvider } from "../providers/ThemeProvider.js";
 import { Weather } from "./Weather.js";
 import { SelectedDayProvider } from "../providers/SelectedDayProvider.js";
 import { RefreshResultsProvider } from "../providers/RefreshResultsProvider.js";
+import { ResponsiveLayoutProvider } from "../providers/ResponsiveLayoutProvider.js";
 
 
 export const App = () => {
@@ -14,7 +15,9 @@ export const App = () => {
 				<ForecastProvider>
 					<ThemeProvider>
 						<SelectedDayProvider>
-							<Weather />
+							<ResponsiveLayoutProvider>
+								<Weather />
+							</ResponsiveLayoutProvider>
 						</SelectedDayProvider>
 					</ThemeProvider>
 				</ForecastProvider>

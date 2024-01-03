@@ -71,12 +71,12 @@ export const ForecastDay = (props: TForecastDayProps) => {
 				<Box marginBottom={1} justifyContent="center">
 					<Text wrap="truncate-middle" color={styles.secondaryElement}>
 						{tempScale === TempScale.Fahrenheit
-							? day.maxTempF + "°F"
-							: day.maxTempC + "°C"}
+								? day.minTempF + "°F"
+								: day.minTempC + "°C"}
 						{" - "}
 						{tempScale === TempScale.Fahrenheit
-							? day.minTempF + "°F"
-							: day.minTempC + "°C"}
+							? day.maxTempF + "°F"
+							: day.maxTempC + "°C"}
 					</Text>
 				</Box>
 				<Text>
