@@ -20,7 +20,7 @@ export  enum Layout {
 enum LayoutBreakPointSizes {
     xs = 60,
     sm = 80,
-    md = 102,
+    md = 100,
     lg = 140
 }
 
@@ -46,11 +46,11 @@ export const useResponsiveLayout = () => {
 
 const getLayoutSize = (columns: number) => {
     switch (true) {
-        case columns < LayoutBreakPointSizes.sm:
+        case columns <= LayoutBreakPointSizes.sm:
              return Layout.xs
-        case columns < LayoutBreakPointSizes.md:
+        case columns <= LayoutBreakPointSizes.md:
              return Layout.sm;
-        case columns < LayoutBreakPointSizes.lg:
+        case columns <= LayoutBreakPointSizes.lg:
              return Layout.md;
         case columns >= LayoutBreakPointSizes.lg:
              return Layout.lg;

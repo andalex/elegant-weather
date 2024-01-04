@@ -9,12 +9,42 @@ import { API_STATUS } from "../api/types.js";
 import { useTheme } from "../providers/ThemeProvider.js";
 import { TforecastDay } from "../api/transforms/types.js";
 import { useSelectedDay } from "../providers/SelectedDayProvider.js";
+import { Layout, useResponsiveLayout } from "../providers/ResponsiveLayoutProvider.js";
+
+
+type TForecastDayHeaderProps = {
+	index: number,
+	dayReadable: TforecastDay["dayReadable"]
+}
+
+const ForecastDayHeader = (props: TForecastDayHeaderProps) => {
+	const {
+		theme: { styles },
+	} = useTheme();
+	const { layoutType } = useResponsiveLayout();
+
+	return layoutType === Layout.sm || layoutType === Layout.xs ?
+		(
+			<Text color={styles.tertiaryElement} wrap="truncate-middle">
+				 {props.dayReadable.shortFormat}
+			</Text>
+		)
+		:
+		(
+		<Text color={styles.tertiaryElement} wrap="truncate-middle">
+			{props.index === 0
+				? `Today ${props.dayReadable.shortFormat}`
+				: `${props.dayReadable.dayName} ${props.dayReadable.shortFormat}`}
+		</Text>
+		)
+		
+}
 
 
 type TForecastDayProps = {
 	day: TforecastDay;
 	index: number;
-	id: string
+	id: string;
 };
 
 export const ForecastDay = (props: TForecastDayProps) => {
@@ -25,13 +55,15 @@ export const ForecastDay = (props: TForecastDayProps) => {
 	const { tempScale } = useWeatherOptions();
 	const { isFocused } = useFocus({ id });
 	const { setSelectedDay } = useSelectedDay();
+	const { layoutType } = useResponsiveLayout();
+
 
 	useEffect(() => {
 		setSelectedDay(day);
-	}, [isFocused])
+	}, [isFocused]);
 
 	return (
-		<Box flexDirection="column">
+		<Box flexDirection="column" flexGrow={0} flexShrink={1} flexBasis="20%">
 			<Box
 				borderStyle={
 					isFocused ? styles.tertiaryBorderStyle : styles.secondaryBorderStyle
@@ -44,16 +76,16 @@ export const ForecastDay = (props: TForecastDayProps) => {
 				paddingLeft={1}
 				paddingRight={1}
 			>
-				<Text color={styles.tertiaryElement} wrap="truncate-middle">
-					{index === 0
-						? `Today ${day.dayReadable.shortFormat}`
-						: `${day.dayReadable.dayName} ${day.dayReadable.shortFormat}`}
-				</Text>
+				<ForecastDayHeader index={index} dayReadable={day.dayReadable} />
 			</Box>
 			<Box
 				borderStyle={styles.secondaryBorderStyle}
 				borderColor={styles.secondaryElement}
 				flexDirection="column"
+				flexBasis="20%"
+				// height="100%"
+				flexGrow={0}
+				flexShrink={1}
 				paddingTop={0}
 				paddingLeft={1}
 				paddingRight={1}
@@ -63,18 +95,19 @@ export const ForecastDay = (props: TForecastDayProps) => {
 						Forecast
 					</Text>
 				</Box>
-				<Box marginBottom={1} justifyContent="center">
-					<Text wrap="truncate-middle" color={styles.primaryAccent}>
+				<Box marginBottom={1} justifyContent="center" padding={1}>
+					<Text wrap="wrap" color={styles.primaryAccent}>
 						{day.condition}
 					</Text>
 				</Box>
-				<Box marginBottom={1} justifyContent="center">
+				<Box marginBottom={1} alignItems="center" flexDirection="column">
 					<Text wrap="truncate-middle" color={styles.secondaryElement}>
-						{tempScale === TempScale.Fahrenheit
-								? day.minTempF + "°F"
-								: day.minTempC + "°C"}
-						{" - "}
-						{tempScale === TempScale.Fahrenheit
+						H: {tempScale === TempScale.Fahrenheit
+							? day.minTempF + "°F"
+							: day.minTempC + "°C"}
+					</Text>
+					<Text wrap="truncate-middle" color={styles.secondaryElement}>
+						L: {tempScale === TempScale.Fahrenheit
 							? day.maxTempF + "°F"
 							: day.maxTempC + "°C"}
 					</Text>
@@ -110,22 +143,24 @@ export const ForecastDay = (props: TForecastDayProps) => {
 					paddingLeft={1}
 					paddingRight={1}
 				>
-					<Box justifyContent="center" padding={1}>
+					<Box marginTop={1} flexDirection="column" alignItems="center">
 						<Text wrap="truncate" bold color={styles.primaryElement}>
 							Astro
 						</Text>
-					</Box>
-					<Text wrap="truncate-middle" color={styles.secondaryElement}>
-						🌅 {day.astro.sunrise}
-					</Text>
-					<Box marginTop={1}>
+						<Text>{' '}</Text>
+						<Text wrap="truncate-middle" color={styles.secondaryElement}>
+							🌅 {day.astro.sunrise}
+						</Text>
+						<Text>{' '}</Text>
 						<Text wrap="truncate-middle" color={styles.secondaryElement}>
 							🌇 {day.astro.sunset}
 						</Text>
 					</Box>
-					<Box marginTop={1}>
-						<MoonPhase moonPhaseType={day.astro.moonPhase} />
-					</Box>
+					{(layoutType === Layout.md || layoutType === Layout.lg) &&
+						<Box marginTop={1}>
+							<MoonPhase moonPhaseType={day.astro.moonPhase} />
+						</Box>
+					}
 				</Box>
 			</Box>
 		</Box>
@@ -144,7 +179,6 @@ export const DailyForecast = () => {
 	return (
 		<Box
 			flexDirection="column"
-			width="100%"
 			borderStyle={styles.secondaryBorderStyle}
 			paddingLeft={2}
 			paddingRight={2}
@@ -162,7 +196,14 @@ export const DailyForecast = () => {
 			) : (
 				<Box width="100%" justifyContent="center" flexDirection="row" gap={1}>
 					{data.forecastDay.map((day, index) => {
-						return <ForecastDay day={day} id={day.dayId} index={index} key={day.dayId}/>;
+						return (
+							<ForecastDay
+								day={day}
+								id={day.dayId}
+								index={index}
+								key={day.dayId}
+							/>
+						);
 					})}
 				</Box>
 			)}

@@ -61,7 +61,7 @@ const HourWeatherElement = (props: THourWeatherElementProps) => {
 			flexShrink={0}
 			flexBasis="25%"
 			flexDirection="column"
-			justifyContent="center"
+			alignItems="center"
 		>
 			<Box flexDirection="row" justifyContent="center">
 				<Text underline {...computeTextStyles(time.now, time.hour)}>

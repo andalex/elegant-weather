@@ -12,7 +12,7 @@
       "tertiaryBorderStyle": "bold"
     }
   },
-  "headerFont": "tiny",
+  "headerFont": "pallet",
   "forecastDays": "5",
   "locationQuery": "Warren, OR",
   "tempScale": "fahrenheit"

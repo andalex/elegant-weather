@@ -12,6 +12,7 @@ import { CurrentConditions } from "./CurrentConditions.js";
 import { ErrorBoundary } from "./ErrorBoundary.js";
 import { ForecastErrorFallback } from './ForecastErrorFallback.js';
 import { DayForecast } from "./DayForecast.js";
+import { useStdoutDimensions } from "../utils/useStdoutDimensions.js";
 import { useResponsiveLayout } from "../providers/ResponsiveLayoutProvider.js";
 
 
@@ -20,6 +21,7 @@ export const Weather: React.FC<{}> = ({}) => {
 		apiData: { status },
 	} = useForecast();
 	const { theme: { styles } } = useTheme();
+	const [columns, rows] = useStdoutDimensions();
 	const { layoutType } = useResponsiveLayout();
 
 	return (
@@ -38,7 +40,7 @@ export const Weather: React.FC<{}> = ({}) => {
 			) : (
 				<>
 					<ErrorBoundary fallbackComponent={<ForecastErrorFallback />}>
-						<Text>LayoutType: {layoutType}</Text>
+						<Text>c: {columns} r: {rows} LT: {layoutType}</Text>
 						<CurrentConditions />
 						<DailyForecast />
 						<DayForecast />
