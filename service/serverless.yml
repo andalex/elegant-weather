@@ -7,11 +7,15 @@ provider:
   name: aws
   runtime: nodejs18.x
 
+custom:
+  functionsBasePath: src/handlers
+
 functions:
   api:
-    handler: index.handler
+    handler: forecast.handler
     events:
       - httpApi: '*'
 
 plugins:
   - serverless-offline
+  - serverless-functions-base-path

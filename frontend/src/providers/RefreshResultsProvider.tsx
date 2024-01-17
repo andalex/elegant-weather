@@ -8,6 +8,7 @@ import React, {
     useEffect,
 } from "react";
 
+//TODO move this to the API directory since it pertains to data fetching and is used inside the ForecastsProvider currently.
 type TrefreshResultsContextState = {
 	refreshResults: boolean,
     setRefreshResults: Dispatch<SetStateAction<boolean>>;
