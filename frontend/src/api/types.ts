@@ -14,7 +14,7 @@ export enum API_STATUS {
   LOADED = "loaded",
   ERROR = "error",
 }
-export const BASE_URL = "http://localhost:3000" // "https://z3w3a715o7.execute-api.us-east-1.amazonaws.com";
+export const BASE_URL = "https://z3w3a715o7.execute-api.us-east-1.amazonaws.com";
 
 export const API_VERSION = "v1";
 

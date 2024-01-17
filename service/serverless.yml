@@ -9,6 +9,8 @@ provider:
 
 custom:
   functionsBasePath: src/handlers
+  serverless-offline:
+    printOutput: true
 
 functions:
   api:

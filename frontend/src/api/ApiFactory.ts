@@ -25,9 +25,7 @@ export class ApiFactory {
     this[`${method.toLowerCase()}${api}`] = async (
       query: TQuery,
     ): Promise<TApiData> => {
-      const resourceUrl = `${url}/${api.toLowerCase()}.json?${constructParams(
-        query,
-      )}`;
+      const resourceUrl = `${url}/${api.toLowerCase()}.json?${constructParams(query)}`;
       const response = await fetchFactory({
         url: resourceUrl,
         method: Methods.Get,

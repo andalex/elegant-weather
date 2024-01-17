@@ -220,7 +220,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/elegant-weather-lambda/dev/1705467771635-2024-01-17T05:02:51.635Z/elegant-weather-lambda.zip"
+                "S3Key": "serverless/elegant-weather-lambda/dev/1705472797053-2024-01-17T06:26:37.053Z/elegant-weather-lambda.zip"
               },
               "Handler": "s_api.handler",
               "Runtime": "nodejs18.x",
@@ -238,14 +238,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionD7nZUIIy5Gt2mDuX7LCijAMoPZP5VN9X4tQOLPVww": {
+          "ApiLambdaVersionSHSDQwApHPQHsZiC9U4z8m9o5J8linTv2JIyuwVhdU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "ccxCN5dY4fQ2cRIaEc4rpyqa+eTGM5C7dhQcCjenHf8="
+              "CodeSha256": "BJm14Sl3+Bl+KYDl8jy1PQKL4FfbIC7BaEoD1WWckrU="
             }
           },
           "HttpApi": {
@@ -380,7 +380,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionD7nZUIIy5Gt2mDuX7LCijAMoPZP5VN9X4tQOLPVww"
+              "Ref": "ApiLambdaVersionSHSDQwApHPQHsZiC9U4z8m9o5J8linTv2JIyuwVhdU"
             },
             "Export": {
               "Name": "sls-elegant-weather-lambda-dev-ApiLambdaFunctionQualifiedArn"
@@ -512,7 +512,10 @@
       "vpc": {}
     },
     "custom": {
-      "functionsBasePath": "src/handlers"
+      "functionsBasePath": "src/handlers",
+      "serverless-offline": {
+        "printOutput": true
+      }
     },
     "plugins": [
       "serverless-offline",
@@ -534,7 +537,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionD7nZUIIy5Gt2mDuX7LCijAMoPZP5VN9X4tQOLPVww"
+        "versionLogicalId": "ApiLambdaVersionSHSDQwApHPQHsZiC9U4z8m9o5J8linTv2JIyuwVhdU"
       }
     },
     "configValidationMode": "warn",
@@ -567,7 +570,7 @@
     "artifact": "/Users/alexanderson/projects/personal-projects/elegant-weather/service/.serverless/elegant-weather-lambda.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/elegant-weather-lambda/dev/1705467771635-2024-01-17T05:02:51.635Z",
+    "artifactDirectoryName": "serverless/elegant-weather-lambda/dev/1705472797053-2024-01-17T06:26:37.053Z",
     "artifact": "elegant-weather-lambda.zip"
   }
 }
