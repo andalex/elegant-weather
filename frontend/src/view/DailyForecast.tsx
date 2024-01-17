@@ -63,7 +63,7 @@ export const ForecastDay = (props: TForecastDayProps) => {
 	}, [isFocused]);
 
 	return (
-		<Box flexDirection="column" flexGrow={0} flexShrink={1} flexBasis="20%">
+		<Box flexDirection="column" flexGrow={0} flexShrink={1}>
 			<Box
 				borderStyle={
 					isFocused ? styles.tertiaryBorderStyle : styles.secondaryBorderStyle
@@ -82,25 +82,23 @@ export const ForecastDay = (props: TForecastDayProps) => {
 				borderStyle={styles.secondaryBorderStyle}
 				borderColor={styles.secondaryElement}
 				flexDirection="column"
-				flexBasis="20%"
-				// height="100%"
 				flexGrow={0}
 				flexShrink={1}
 				paddingTop={0}
 				paddingLeft={1}
 				paddingRight={1}
 			>
-				<Box justifyContent="center" padding={1}>
+				<Box padding={1}>
 					<Text wrap="truncate" bold color={styles.primaryElement}>
 						Forecast
 					</Text>
 				</Box>
-				<Box marginBottom={1} justifyContent="center" padding={1}>
+				<Box marginBottom={1}  paddingLeft={1} paddingRight={1}>
 					<Text wrap="wrap" color={styles.primaryAccent}>
 						{day.condition}
 					</Text>
 				</Box>
-				<Box marginBottom={1} alignItems="center" flexDirection="column">
+				<Box marginBottom={1} paddingLeft={1} paddingRight={1} flexDirection="column">
 					<Text wrap="truncate-middle" color={styles.secondaryElement}>
 						H: {tempScale === TempScale.Fahrenheit
 							? day.minTempF + "°F"
@@ -115,7 +113,7 @@ export const ForecastDay = (props: TForecastDayProps) => {
 				<Text>
 					<Text color={styles.secondaryElement}>{day.dailyWillItRain}</Text>
 				</Text>
-				<Box marginBottom={1} justifyContent="center">
+				<Box>
 					{day.dailyWillItRain ? (
 						<Text>
 							💧{" "}
@@ -137,31 +135,33 @@ export const ForecastDay = (props: TForecastDayProps) => {
 						</Text>
 					)}
 				</Box>
-				<Box
-					flexDirection="column"
-					paddingTop={0}
-					paddingLeft={1}
-					paddingRight={1}
-				>
-					<Box marginTop={1} flexDirection="column" alignItems="center">
-						<Text wrap="truncate" bold color={styles.primaryElement}>
-							Astro
-						</Text>
-						<Text>{' '}</Text>
-						<Text wrap="truncate-middle" color={styles.secondaryElement}>
-							🌅 {day.astro.sunrise}
-						</Text>
-						<Text>{' '}</Text>
-						<Text wrap="truncate-middle" color={styles.secondaryElement}>
-							🌇 {day.astro.sunset}
-						</Text>
-					</Box>
-					{(layoutType === Layout.md || layoutType === Layout.lg) &&
-						<Box marginTop={1}>
-							<MoonPhase moonPhaseType={day.astro.moonPhase} />
+				{(layoutType === Layout.md || layoutType === Layout.lg) &&
+					<Box
+						flexDirection="column"
+						paddingTop={0}
+						paddingLeft={1}
+						paddingRight={1}
+					>
+						<Box marginTop={1} flexDirection="column">
+							<Text wrap="truncate" bold color={styles.primaryElement}>
+								Astro
+							</Text>
+							<Text>{' '}</Text>
+							<Text wrap="truncate-middle" color={styles.secondaryElement}>
+								🌅 {day.astro.sunrise}
+							</Text>
+							<Text>{' '}</Text>
+							<Text wrap="truncate-middle" color={styles.secondaryElement}>
+								🌇 {day.astro.sunset}
+							</Text>
 						</Box>
-					}
-				</Box>
+						{(layoutType === Layout.md || layoutType === Layout.lg) &&
+							<Box marginTop={1}>
+								<MoonPhase moonPhaseType={day.astro.moonPhase} />
+							</Box>
+						}
+					</Box>
+				}
 			</Box>
 		</Box>
 	);

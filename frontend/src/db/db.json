@@ -1,18 +1,18 @@
 {
   "theme": {
-    "themeName": "plainjane",
+    "themeName": "classic",
     "styles": {
-      "primaryElement": "#fdf9f3",
-      "secondaryElement": "gray",
-      "tertiaryElement": "#fdf9f3",
-      "primaryAccent": "#fdf9f3",
-      "secondaryAccent": "#fdf9f3",
+      "primaryElement": "greenBright",
+      "secondaryElement": "green",
+      "tertiaryElement": "white",
+      "primaryAccent": "cyan",
+      "secondaryAccent": "gray",
       "primaryBorderStyle": "classic",
       "secondaryBorderStyle": "round",
       "tertiaryBorderStyle": "bold"
     }
   },
-  "headerFont": "pallet",
+  "headerFont": "tiny",
   "forecastDays": "5",
   "locationQuery": "Warren, OR",
   "tempScale": "fahrenheit"

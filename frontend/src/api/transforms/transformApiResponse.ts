@@ -108,6 +108,21 @@ const forecastTransformer = (response: { [key: string]: any }) => {
 				};
 			}
 		),
+		alerts: data.alerts.alert.map(alert => {
+			return {
+				area: alert.areas,
+				headline: alert.headline,
+                severity: alert.severity,
+                urgency: alert.urgency,
+                areas: alert.areas,
+                certainty: alert.certainty,
+                event: alert.event,
+                effective: alert.effective,
+                expires: alert.expires,
+                desc: alert.desc,
+                instruction: alert.instruction
+			}
+		}),
 		location: {
 			country: data.location.country,
 			city: data.location.name,

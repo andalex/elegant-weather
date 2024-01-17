@@ -358,24 +358,22 @@ export const WeatherOptions = () => {
 				marginTop={0}
 				marginBottom={0}
 			>
+				<Box justifyContent="center" padding={1}>
+					<Text bold color={styles.primaryElement}>
+						Weather Options
+					</Text>
+				</Box>
 				<Box flexDirection="row" width="100%" justifyContent="center">
 					<ToggleWeatherOptions isOpen={isOpen} setIsOpen={setIsOpen} id="1" />
 				</Box>
 				{isOpen && (
-					<>
-						<Box justifyContent="center" padding={1}>
-							<Text bold color={styles.primaryElement}>
-								Weather Options
-							</Text>
-						</Box>
-						<Box flexDirection="row" justifyContent="center">
-							<WeatherLocationInput id="2" />
-							<TempScaleSelect id="3" />
-							<ForecastDaysInput id="4" />
-							<HeaderFontSelect id="5" />
-							<SelectTheme id="6" />
-						</Box>
-					</>
+					<Box flexDirection="row" justifyContent="center">
+						<WeatherLocationInput id="2" />
+						<TempScaleSelect id="3" />
+						<ForecastDaysInput id="4" />
+						<HeaderFontSelect id="5" />
+						<SelectTheme id="6" />
+					</Box>
 				)}
 			<Box alignItems="center" flexDirection="column" width="100%" padding={2}>
 				<Text bold color={styles.primaryElement}>

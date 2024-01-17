@@ -14,6 +14,7 @@ import { ForecastErrorFallback } from './ForecastErrorFallback.js';
 import { DayForecast } from "./DayForecast.js";
 import { useStdoutDimensions } from "../utils/useStdoutDimensions.js";
 import { useResponsiveLayout } from "../providers/ResponsiveLayoutProvider.js";
+import { WeatherAlerts } from "./WeatherAlerts.js";
 
 
 export const Weather: React.FC<{}> = ({}) => {
@@ -40,11 +41,12 @@ export const Weather: React.FC<{}> = ({}) => {
 			) : (
 				<>
 					<ErrorBoundary fallbackComponent={<ForecastErrorFallback />}>
-						<Text>c: {columns} r: {rows} LT: {layoutType}</Text>
+						{/* <Text>c: {columns} r: {rows} LT: {layoutType}</Text> */}
 						<CurrentConditions />
 						<DailyForecast />
 						<DayForecast />
 						<AQI />
+						{/* <WeatherAlerts /> */}
 					</ErrorBoundary>
 					<WeatherOptions />
 				</>

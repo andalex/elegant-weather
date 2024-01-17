@@ -60,7 +60,7 @@ export const AQI = () => {
 					Air Quality
 				</Text>
 			</Box>
-			<Box flexDirection="row" margin={1} width="100%" justifyContent="center">
+			<Box flexDirection="row" marginBottom={1} width="100%" justifyContent="center">
 				<Box
 					flexDirection="row"
 					width="auto"

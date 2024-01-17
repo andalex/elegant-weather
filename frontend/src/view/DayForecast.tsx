@@ -57,7 +57,7 @@ const HourWeatherElement = (props: THourWeatherElementProps) => {
 	return (
 		<Box
 			{...computeBorderStyles(time.now, time.hour)}
-			flexGrow={0}
+			flexGrow={1}
 			flexShrink={0}
 			flexBasis="25%"
 			flexDirection="column"
